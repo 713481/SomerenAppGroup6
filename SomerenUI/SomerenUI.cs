@@ -25,6 +25,8 @@ namespace SomerenUI
             pnlStudents.Hide();
             pnlLecturers.Hide();
             pnlDrinks.Hide();
+            pnlRoom.Hide();
+
             // ...
 
             // show dashboard
@@ -36,6 +38,7 @@ namespace SomerenUI
             pnlDashboard.Hide();
             pnlStudents.Hide();
             pnlDrinks.Hide();
+            pnlRoom.Hide();
 
             // ...
 
@@ -61,6 +64,7 @@ namespace SomerenUI
             pnlDashboard.Hide();
             pnlStudents.Hide();
             pnlLecturers.Hide();
+            pnlRoom.Hide();
 
             // show drinks
             pnlDrinks.Show();
@@ -111,6 +115,7 @@ namespace SomerenUI
             pnlDashboard.Hide();
             pnlLecturers.Hide();
             pnlDrinks.Hide();
+            pnlRoom.Hide();
             // ...
 
             // show students
@@ -300,6 +305,70 @@ namespace SomerenUI
             {
                 MessageBox.Show("Something went wrong while loading the drinks: " + e.Message);
             }
+        }
+
+        private void ShowRoomPanel()
+        {
+            //hide other panel
+            pnlLecturers.Hide();
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            //pnlDrink.Hide();
+
+            //show room panel
+            pnlRoom.Show();
+
+            try
+            {
+                // get and display all students
+                List<Room> rooms = GetRooms();
+                DisplayRoom(rooms);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the Room: " + e.Message);
+            }
+        }
+
+        private List<Room> GetRooms()
+        {
+            RoomService roomService = new RoomService();
+            List<Room> rooms = roomService.GetRooms();
+            return rooms;
+        }
+
+        private void DisplayRoom(List<Room> rooms)
+        {
+            // clear the listview before filling it
+            /*listViewStudents.Clear();*/
+
+            listViewOfRoom.Items.Clear();
+            //listViewStudents.Columns.Clear();
+            //listViewStudents.View = View.Details;
+            //AddStudentColumns();
+
+            foreach (Room room in rooms)
+            {
+                ListViewItem lvItem = CreateListViewItemForRoom(room);
+                listViewOfRoom.Items.Add(lvItem);
+            }
+        }
+
+        private ListViewItem CreateListViewItemForRoom(Room room)
+        {
+            // Creates new listviewitem and add the data to the columns
+            ListViewItem li = new ListViewItem(room.RoomID.ToString()); // Convert to string
+            li.SubItems.Add(room.Capacity.ToString()); // Convert to string
+            li.SubItems.Add(room.Floor.ToString()); // Convert to string
+            li.SubItems.Add(room.Building.ToString()); // Convert char to string
+            li.SubItems.Add(room.Type.ToString()); // Convert char to string
+            li.Tag = room;   // link room object to listview item
+            return li;
+        }
+
+        private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowRoomPanel();
         }
     }
 }

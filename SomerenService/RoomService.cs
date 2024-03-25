@@ -17,7 +17,7 @@ namespace SomerenService
             roomdb = new RoomDao();
         }
 
-        public List<Room> GetLecturers()
+        public List<Room> GetRooms()
         {
             List<Room> rooms = roomdb.GetAllRooms();
             return rooms;
