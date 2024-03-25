@@ -28,9 +28,9 @@ namespace SomerenDAL
                 {
                     RoomID = (int)dr["RoomId"],
                     Capacity = (int)dr["NumberBed"],
-                    Type = (char)dr["Type"],
+                    Type = (string)dr["Type"],
                     Floor = (int)dr["FloorRoom"],
-                    Building = (char)dr["Building"],
+                    Building = (string)dr["Building"],
                 };
                 rooms.Add(room);
             }
