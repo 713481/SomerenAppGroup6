@@ -63,6 +63,7 @@
             columnHeader11 = new System.Windows.Forms.ColumnHeader();
             columnHeader12 = new System.Windows.Forms.ColumnHeader();
             columnHeader13 = new System.Windows.Forms.ColumnHeader();
+            columnHeader14 = new System.Windows.Forms.ColumnHeader();
             label3 = new System.Windows.Forms.Label();
             pnlDrinks = new System.Windows.Forms.Panel();
             btnEditDrink = new System.Windows.Forms.Button();
@@ -87,7 +88,6 @@
             columnHeader7 = new System.Windows.Forms.ColumnHeader();
             columnHeader8 = new System.Windows.Forms.ColumnHeader();
             lblRoom = new System.Windows.Forms.Label();
-            columnHeader14 = new System.Windows.Forms.ColumnHeader();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlLecturers.SuspendLayout();
@@ -190,10 +190,10 @@
             pnlLecturers.Controls.Add(pictureBox2);
             pnlLecturers.Controls.Add(listviewLecturers);
             pnlLecturers.Controls.Add(label2);
-            pnlLecturers.Location = new System.Drawing.Point(0, 0);
+            pnlLecturers.Location = new System.Drawing.Point(3, 27);
             pnlLecturers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pnlLecturers.Name = "pnlLecturers";
-            pnlLecturers.Size = new System.Drawing.Size(1072, 621);
+            pnlLecturers.Size = new System.Drawing.Size(1093, 645);
             pnlLecturers.TabIndex = 3;
             pnlLecturers.Paint += pnlLecturers_Paint;
             // 
@@ -248,10 +248,10 @@
             pnlStudents.Controls.Add(pictureBox1);
             pnlStudents.Controls.Add(listViewStudents);
             pnlStudents.Controls.Add(label1);
-            pnlStudents.Location = new System.Drawing.Point(0, 0);
+            pnlStudents.Location = new System.Drawing.Point(0, 18);
             pnlStudents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pnlStudents.Name = "pnlStudents";
-            pnlStudents.Size = new System.Drawing.Size(1072, 621);
+            pnlStudents.Size = new System.Drawing.Size(1096, 650);
             pnlStudents.TabIndex = 2;
             // 
             // pictureBox1
@@ -315,10 +315,10 @@
             pnlRoom.Controls.Add(pictureBox5);
             pnlRoom.Controls.Add(listViewOfRoom);
             pnlRoom.Controls.Add(label3);
-            pnlRoom.Location = new System.Drawing.Point(0, 0);
+            pnlRoom.Location = new System.Drawing.Point(0, 9);
             pnlRoom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pnlRoom.Name = "pnlRoom";
-            pnlRoom.Size = new System.Drawing.Size(1072, 621);
+            pnlRoom.Size = new System.Drawing.Size(1099, 663);
             pnlRoom.TabIndex = 6;
             // 
             // pictureBox5
@@ -362,6 +362,11 @@
             columnHeader13.Text = "Floor";
             columnHeader13.Width = 120;
             // 
+            // columnHeader14
+            // 
+            columnHeader14.Text = "Building";
+            columnHeader14.Width = 120;
+            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -380,10 +385,10 @@
             pnlDrinks.Controls.Add(pictureBox3);
             pnlDrinks.Controls.Add(listViewDrinks);
             pnlDrinks.Controls.Add(lblDrinks);
-            pnlDrinks.Location = new System.Drawing.Point(0, 0);
+            pnlDrinks.Location = new System.Drawing.Point(3, 27);
             pnlDrinks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pnlDrinks.Name = "pnlDrinks";
-            pnlDrinks.Size = new System.Drawing.Size(1072, 621);
+            pnlDrinks.Size = new System.Drawing.Size(1090, 641);
             pnlDrinks.TabIndex = 4;
             // 
             // btnEditDrink
@@ -546,22 +551,17 @@
             lblRoom.TabIndex = 0;
             lblRoom.Text = "Room";
             // 
-            // columnHeader14
-            // 
-            columnHeader14.Text = "Building";
-            columnHeader14.Width = 120;
-            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 673);
             Controls.Add(menuStrip1);
+            Controls.Add(pnlDrinks);
+            Controls.Add(pnlDashboard);
             Controls.Add(pnlRoom);
             Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
-            Controls.Add(pnlDashboard);
-            Controls.Add(pnlDrinks);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "SomerenUI";
