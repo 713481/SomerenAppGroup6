@@ -22,49 +22,28 @@ namespace SomerenUI
         private void ShowDashboardPanel()
         {
             // hide all other panels
-            pnlStudents.Hide();
-            pnlLecturers.Hide();
-            pnlDrinks.Hide();
-            pnlRoom.Hide();
+            HideAllPanel();
 
             // ...
 
             // show dashboard
             pnlDashboard.Show();
         }
-        private void ShowLecturersPanel()
+        private void HideAllPanel()
         {
-            // hide all other panels
-            pnlDashboard.Hide();
             pnlStudents.Hide();
+            pnlLecturers.Hide();
             pnlDrinks.Hide();
             pnlRoom.Hide();
+            pnlDashboard.Hide();
 
-            // ...
-
-            // show students
-            pnlLecturers.Show();
-
-
-            try
-            {
-                // get and display all students
-                List<Teacher> lecturers = GetLecturers();
-                DisplayLecturers(lecturers);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
-            }
         }
+       
         // show the drink panel
         private void ShowDrinksPanel()
         {
             // hide all other panels
-            pnlDashboard.Hide();
-            pnlStudents.Hide();
-            pnlLecturers.Hide();
-            pnlRoom.Hide();
+            HideAllPanel();
 
             // show drinks
             pnlDrinks.Show();
@@ -79,6 +58,26 @@ namespace SomerenUI
                 MessageBox.Show("Something went wrong while loading the drinks: " + e.Message);
             }
         }
+        //----------------------------------lecturer--------------------------------------
+        private void ShowLecturersPanel()
+        {
+            // hide all other panels
+            HideAllPanel();
+            // show lecturer
+            pnlLecturers.Show();
+
+
+            try
+            {
+                // get and display all lecturer
+                List<Teacher> lecturers = GetLecturers();
+                DisplayLecturers(lecturers);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the lecturer: " + e.Message);
+            }
+        }
 
         private List<Teacher> GetLecturers()
         {
@@ -88,7 +87,7 @@ namespace SomerenUI
         }
         private void DisplayLecturers(List<Teacher> lecturers)
         {
-            listViewStudents.Items.Clear();
+            listviewLecturers.Items.Clear();
 
             foreach (Teacher lecturer in lecturers)
             {
@@ -102,9 +101,9 @@ namespace SomerenUI
             ListViewItem li = new ListViewItem(lecturer.FirstName);
             li.SubItems.Add(lecturer.LastName);
             li.SubItems.Add(lecturer.PhoneNumber.ToString());
-            li.SubItems.Add(lecturer.PhoneNumber.ToString());
+            li.SubItems.Add(lecturer.Age.ToString());
             li.SubItems.Add(lecturer.RoomID.ToString());
-            li.Tag = lecturer;   // link student object to listview item
+            li.Tag = lecturer;   // link lecturer object to listview item
             return li;
         }
 
@@ -112,10 +111,7 @@ namespace SomerenUI
         private void ShowStudentsPanel()
         {
             // hide all other panels
-            pnlDashboard.Hide();
-            pnlLecturers.Hide();
-            pnlDrinks.Hide();
-            pnlRoom.Hide();
+            HideAllPanel();
             // ...
 
             // show students
@@ -310,9 +306,7 @@ namespace SomerenUI
         private void ShowRoomPanel()
         {
             //hide other panel
-            pnlLecturers.Hide();
-            pnlDashboard.Hide();
-            pnlStudents.Hide();
+            HideAllPanel();
             //pnlDrink.Hide();
 
             //show room panel
@@ -370,5 +364,8 @@ namespace SomerenUI
         {
             ShowRoomPanel();
         }
+        //------------------Lecturer------------------------------------
+
+
     }
 }
