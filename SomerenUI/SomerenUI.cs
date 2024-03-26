@@ -411,25 +411,24 @@ namespace SomerenUI
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            //assigned datepicker to thier assignment value
             DateTime startDate = dateTimePickerStart.Value;
             DateTime endDate = dateTimePickerEnd.Value;
 
-            if (startDate > endDate)
+            //invalid
+          if(startDate > endDate)
             {
-                MessageBox.Show("End date must be after start date.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("Start date cannot be after end date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
-            
-            if (startDate == endDate.AddDays(-1))
+            if (endDate > DateTime.Today.AddDays(1))
             {
-                MessageBox.Show("Start date cannot be yesterday.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("End date cannot end in the future.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
+            if((endDate - startDate).Days < 1)
+            {
+                MessageBox.Show("PLease have a range date of atleast one to proceed.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             List<RevenueReport> revenueReports = GetRevenueReports(startDate, endDate);
-
-            // Display revenue reports in UI
             DisplayRevenueReports(revenueReports);
         }
     }
