@@ -15,7 +15,7 @@ namespace SomerenDAL
         {
             string query = "SELECT Name AS DrinkName, " +
                  "SUM(CountOrder) AS Sales, " +
-                "SUM(CountOrder * (Price + (Price * VAT))) AS Turnover, COUNT(DISTINCT studentID) AS NumberOfCustomers " +
+                "SUM(CountOrder * (Price + (Price * (VAT / 100)))) AS Turnover, COUNT(DISTINCT studentID) AS NumberOfCustomers " +
                 "FROM [order] AS o JOIN drink AS d ON o.DrinkID = d.DrinkID " +
                 "WHERE [DateTime] BETWEEN @StartDate AND @EndDate " +
                 "GROUP BY d.Name";

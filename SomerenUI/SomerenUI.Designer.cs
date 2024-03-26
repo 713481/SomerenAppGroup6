@@ -104,6 +104,7 @@
             columnHeader7 = new System.Windows.Forms.ColumnHeader();
             columnHeader8 = new System.Windows.Forms.ColumnHeader();
             lblRoom = new System.Windows.Forms.Label();
+            studentNumber = new System.Windows.Forms.ColumnHeader();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlRoom.SuspendLayout();
@@ -300,7 +301,7 @@
             // 
             // listViewStudents
             // 
-            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { firstName, lastName, phoneNumber, age, classroom });
+            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentNumber, firstName, lastName, phoneNumber, age, classroom });
             listViewStudents.Location = new System.Drawing.Point(15, 56);
             listViewStudents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listViewStudents.Name = "listViewStudents";
@@ -327,7 +328,6 @@
             // age
             // 
             age.Text = "Age";
-            age.Width = 100;
             // 
             // classroom
             // 
@@ -700,18 +700,23 @@
             lblRoom.TabIndex = 0;
             lblRoom.Text = "Room";
             // 
+            // studentNumber
+            // 
+            studentNumber.Text = "StudentID";
+            studentNumber.Width = 100;
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 697);
             Controls.Add(menuStrip1);
-            Controls.Add(pnlLecturers);
             Controls.Add(pnlStudents);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlRoom);
             Controls.Add(pnlReport);
+            Controls.Add(pnlLecturers);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "SomerenUI";
@@ -818,6 +823,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
         private System.Windows.Forms.DateTimePicker dateTimePickerStart;
+        private System.Windows.Forms.ColumnHeader studentNumber;
         //private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }
