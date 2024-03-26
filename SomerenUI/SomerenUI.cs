@@ -35,10 +35,12 @@ namespace SomerenUI
             pnlLecturers.Hide();
             pnlDrinks.Hide();
             pnlRoom.Hide();
+            pnlReport.Hide();
             pnlDashboard.Hide();
 
+
         }
-       
+
         // show the drink panel
         private void ShowDrinksPanel()
         {
@@ -364,8 +366,71 @@ namespace SomerenUI
         {
             ShowRoomPanel();
         }
-        //------------------Lecturer------------------------------------
+        //------------------Revenue Report------------------------------------
+        private void revenueReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowRevenueReportPanel();
+        }
+        private void ShowRevenueReportPanel()
+        {
+            // hide all other panels
+            HideAllPanel();
+            // show revenue report
+            pnlReport.Show();
 
 
+            
+        }
+        private List<RevenueReport> GetRevenueReports(DateTime startDate, DateTime endDate)
+        {
+            RevenueReportService revenueReportService = new RevenueReportService();
+
+            List<RevenueReport> revenueReports = revenueReportService.GetRevenueReports( startDate, endDate);
+            return revenueReports;
+        }
+        private void DisplayRevenueReports(List<RevenueReport> revenueReports)
+        {
+            listViewRevenueReports.Items.Clear();
+
+            foreach (RevenueReport revenueReport in revenueReports)
+            {
+                ListViewItem lvItem = CreateListViewItem(revenueReport);
+                listViewRevenueReports.Items.Add(lvItem);
+            }
+        }
+        private ListViewItem CreateListViewItem(RevenueReport revenueReport)
+        {
+            // Creates new listviewitem and add the data to the columns
+            ListViewItem li = new ListViewItem(revenueReport.DrinkName.ToString());
+            li.SubItems.Add(revenueReport.Sales.ToString());
+            li.SubItems.Add(revenueReport.Turnover.ToString("C"));
+            li.SubItems.Add(revenueReport.NumberOfCustomers.ToString());
+            li.Tag = revenueReport;   // link revenue report object to listview item
+            return li;
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = dateTimePickerStart.Value;
+            DateTime endDate = dateTimePickerEnd.Value;
+
+            if (startDate > endDate)
+            {
+                MessageBox.Show("End date must be after start date.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            
+            if (startDate == endDate.AddDays(-1))
+            {
+                MessageBox.Show("Start date cannot be yesterday.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<RevenueReport> revenueReports = GetRevenueReports(startDate, endDate);
+
+            // Display revenue reports in UI
+            DisplayRevenueReports(revenueReports);
+        }
     }
 }
