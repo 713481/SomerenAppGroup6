@@ -62,11 +62,11 @@
             pnlLecturers = new System.Windows.Forms.Panel();
             pictureBox2 = new System.Windows.Forms.PictureBox();
             listviewLecturers = new System.Windows.Forms.ListView();
-            columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            columnHeader15 = new System.Windows.Forms.ColumnHeader();
-            columnHeader16 = new System.Windows.Forms.ColumnHeader();
+            lecturerFirstName = new System.Windows.Forms.ColumnHeader();
+            lecturerLastName = new System.Windows.Forms.ColumnHeader();
+            lecturerPhoneNumber = new System.Windows.Forms.ColumnHeader();
+            lecturerAge = new System.Windows.Forms.ColumnHeader();
+            lecturerRoom = new System.Windows.Forms.ColumnHeader();
             label2 = new System.Windows.Forms.Label();
             pnlReport = new System.Windows.Forms.Panel();
             btnGenerate = new System.Windows.Forms.Button();
@@ -76,10 +76,10 @@
             dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
             pictureBox6 = new System.Windows.Forms.PictureBox();
             listViewRevenueReports = new System.Windows.Forms.ListView();
-            columnHeader21 = new System.Windows.Forms.ColumnHeader();
-            columnHeader22 = new System.Windows.Forms.ColumnHeader();
-            columnHeader23 = new System.Windows.Forms.ColumnHeader();
-            columnHeader24 = new System.Windows.Forms.ColumnHeader();
+            reportDrinkName = new System.Windows.Forms.ColumnHeader();
+            reportSale = new System.Windows.Forms.ColumnHeader();
+            reportTurnover = new System.Windows.Forms.ColumnHeader();
+            reportNumberOfCustomer = new System.Windows.Forms.ColumnHeader();
             label4 = new System.Windows.Forms.Label();
             pnlDrinks = new System.Windows.Forms.Panel();
             btnEditDrink = new System.Windows.Forms.Button();
@@ -368,7 +368,7 @@
             // 
             // listviewLecturers
             // 
-            listviewLecturers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader4, columnHeader5, columnHeader6, columnHeader15, columnHeader16 });
+            listviewLecturers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lecturerFirstName, lecturerLastName, lecturerPhoneNumber, lecturerAge, lecturerRoom });
             listviewLecturers.Location = new System.Drawing.Point(15, 56);
             listviewLecturers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listviewLecturers.Name = "listviewLecturers";
@@ -377,29 +377,29 @@
             listviewLecturers.UseCompatibleStateImageBehavior = false;
             listviewLecturers.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader4
+            // lecturerFirstName
             // 
-            columnHeader4.Text = "First Name";
-            columnHeader4.Width = 100;
+            lecturerFirstName.Text = "First Name";
+            lecturerFirstName.Width = 100;
             // 
-            // columnHeader5
+            // lecturerLastName
             // 
-            columnHeader5.Text = "Last Name";
-            columnHeader5.Width = 100;
+            lecturerLastName.Text = "Last Name";
+            lecturerLastName.Width = 100;
             // 
-            // columnHeader6
+            // lecturerPhoneNumber
             // 
-            columnHeader6.Text = "Phone Number";
-            columnHeader6.Width = 150;
+            lecturerPhoneNumber.Text = "Phone Number";
+            lecturerPhoneNumber.Width = 150;
             // 
-            // columnHeader15
+            // lecturerAge
             // 
-            columnHeader15.Text = "Age";
+            lecturerAge.Text = "Age";
             // 
-            // columnHeader16
+            // lecturerRoom
             // 
-            columnHeader16.Text = "RoomID";
-            columnHeader16.Width = 100;
+            lecturerRoom.Text = "RoomID";
+            lecturerRoom.Width = 100;
             // 
             // label2
             // 
@@ -487,7 +487,7 @@
             // 
             // listViewRevenueReports
             // 
-            listViewRevenueReports.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { columnHeader21, columnHeader22, columnHeader23, columnHeader24 });
+            listViewRevenueReports.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { reportDrinkName, reportSale, reportTurnover, reportNumberOfCustomer });
             listViewRevenueReports.Location = new System.Drawing.Point(15, 118);
             listViewRevenueReports.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listViewRevenueReports.Name = "listViewRevenueReports";
@@ -496,25 +496,25 @@
             listViewRevenueReports.UseCompatibleStateImageBehavior = false;
             listViewRevenueReports.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader21
+            // reportDrinkName
             // 
-            columnHeader21.Text = "Drink Name";
-            columnHeader21.Width = 100;
+            reportDrinkName.Text = "Drink Name";
+            reportDrinkName.Width = 100;
             // 
-            // columnHeader22
+            // reportSale
             // 
-            columnHeader22.Text = "Total Sale";
-            columnHeader22.Width = 100;
+            reportSale.Text = "Total Sale";
+            reportSale.Width = 100;
             // 
-            // columnHeader23
+            // reportTurnover
             // 
-            columnHeader23.Text = "Turnover";
-            columnHeader23.Width = 100;
+            reportTurnover.Text = "Turnover";
+            reportTurnover.Width = 100;
             // 
-            // columnHeader24
+            // reportNumberOfCustomer
             // 
-            columnHeader24.Text = "Number of Customer";
-            columnHeader24.Width = 160;
+            reportNumberOfCustomer.Text = "Number of Customer";
+            reportNumberOfCustomer.Width = 160;
             // 
             // label4
             // 
@@ -706,12 +706,12 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 697);
             Controls.Add(menuStrip1);
-            Controls.Add(pnlReport);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlStudents);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlRoom);
+            Controls.Add(pnlReport);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "SomerenUI";
@@ -763,9 +763,9 @@
         private System.Windows.Forms.Panel pnlLecturers;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ListView listviewLecturers;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader lecturerFirstName;
+        private System.Windows.Forms.ColumnHeader lecturerLastName;
+        private System.Windows.Forms.ColumnHeader lecturerPhoneNumber;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColumnHeader age;
         private System.Windows.Forms.ColumnHeader classroom;
@@ -802,16 +802,16 @@
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ColumnHeader columnHeader14;
-        private System.Windows.Forms.ColumnHeader columnHeader15;
-        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader lecturerAge;
+        private System.Windows.Forms.ColumnHeader lecturerRoom;
         private System.Windows.Forms.ToolStripMenuItem revenueReportToolStripMenuItem;
         private System.Windows.Forms.Panel pnlReport;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.ListView listViewRevenueReports;
-        private System.Windows.Forms.ColumnHeader columnHeader21;
-        private System.Windows.Forms.ColumnHeader columnHeader22;
-        private System.Windows.Forms.ColumnHeader columnHeader23;
-        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.ColumnHeader reportDrinkName;
+        private System.Windows.Forms.ColumnHeader reportSale;
+        private System.Windows.Forms.ColumnHeader reportTurnover;
+        private System.Windows.Forms.ColumnHeader reportNumberOfCustomer;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Label label6;
