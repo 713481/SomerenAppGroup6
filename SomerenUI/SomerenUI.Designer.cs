@@ -705,11 +705,11 @@
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 697);
+            Controls.Add(menuStrip1);
             Controls.Add(pnlReport);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlStudents);
             Controls.Add(pnlDashboard);
-            Controls.Add(menuStrip1);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlRoom);
             MainMenuStrip = menuStrip1;

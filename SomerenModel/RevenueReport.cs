@@ -10,7 +10,7 @@ namespace SomerenModel
     {
         public string DrinkName { get; set; } 
         public int Sales { get; set; }
-        public decimal Turnover { get; set; }
+        public double Turnover { get; set; }
         public int NumberOfCustomers { get; set; }
     }
 }

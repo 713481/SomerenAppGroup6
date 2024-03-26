@@ -15,7 +15,7 @@ namespace SomerenDAL
         {
             string query = "SELECT Name AS DrinkName, " +
                  "SUM(CountOrder) AS Sales, " +
-                "SUM(CountOrder * (Price + (Price * VAT))) AS Turnover, COUNT(DISTINCT StudentID) AS NumberOfCustomers " +
+                "SUM(CountOrder * (Price + (Price * VAT))) AS Turnover, COUNT(DISTINCT studentID) AS NumberOfCustomers " +
                 "FROM [order] AS o JOIN drink AS d ON o.DrinkID = d.DrinkID " +
                 "WHERE [DateTime] BETWEEN @StartDate AND @EndDate " +
                 "GROUP BY d.Name";
@@ -37,8 +37,8 @@ namespace SomerenDAL
                 {
                     DrinkName= dr["DrinkName"].ToString(),  
                     Sales = (int)dr["Sales"],
-                    Turnover = (int)dr["Turnover"],
-                    NumberOfCustomers = (int)dr["NUmberOfCustomer"]
+                    Turnover = (double)dr["Turnover"],
+                    NumberOfCustomers = (int)dr["NumberOfCustomers"]
                 };
                 revenueReports.Add(revenueReport);
             }
