@@ -192,10 +192,11 @@ namespace SomerenUI
         private ListViewItem CreateListViewItem(Student student)
         {
             // Creates new listviewitem and add the data to the columns
-            ListViewItem li = new ListViewItem(student.FirstName);
+            ListViewItem li = new ListViewItem(student.Number.ToString());
+            li.SubItems.Add(student.FirstName);
             li.SubItems.Add(student.LastName);
             li.SubItems.Add(student.PhoneNumber.ToString());
-            li.SubItems.Add(student.Number.ToString());
+            li.SubItems.Add(student.Age.ToString());
             li.SubItems.Add(student.Class.ToString());
             li.Tag = student;   // link student object to listview item
             return li;
