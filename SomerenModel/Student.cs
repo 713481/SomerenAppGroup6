@@ -11,5 +11,6 @@ namespace SomerenModel
         public int PhoneNumber { get; set; } // Phone number
         public int Age { get; set; } // Age
         public string Class {  get; set; } // Class
+        public int Room {  get; set; } // Room
     }
 }

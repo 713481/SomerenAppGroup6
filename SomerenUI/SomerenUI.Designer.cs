@@ -702,6 +702,7 @@
             btnAddStudent.TabIndex = 3;
             btnAddStudent.Text = "Add student";
             btnAddStudent.UseVisualStyleBackColor = true;
+            btnAddStudent.Click += btnAddStudent_Click;
             // 
             // btnRemoveStudent
             // 
