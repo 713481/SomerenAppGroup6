@@ -130,6 +130,15 @@ namespace SomerenUI
                 MessageBox.Show("Something went wrong while loading the students: " + e.Message);
             }
         }
+        private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+            AddStudent form = new AddStudent();
+            if (form.ShowDialog() == DialogResult.OK) // Show AddDrink form as dialog
+            {
+                RefreshStudents(); // Refresh the ListView after the AddDrink form is closed
+            }
+        }
+
         //Grabs the drinks from DB
         private List<Drink> GetDrinks()
         {
@@ -305,12 +314,23 @@ namespace SomerenUI
                 MessageBox.Show("Something went wrong while loading the drinks: " + e.Message);
             }
         }
+        public void RefreshStudents()
+        {
+            try
+            {
+                List<Student> students = GetStudents();
+                DisplayStudents(students);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
+            }
+        }
 
         private void ShowRoomPanel()
         {
             //hide other panel
             HideAllPanel();
-            //pnlDrink.Hide();
 
             //show room panel
             pnlRoom.Show();
