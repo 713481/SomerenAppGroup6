@@ -380,13 +380,13 @@ namespace SomerenUI
             pnlReport.Show();
 
 
-            
+
         }
         private List<RevenueReport> GetRevenueReports(DateTime startDate, DateTime endDate)
         {
             RevenueReportService revenueReportService = new RevenueReportService();
 
-            List<RevenueReport> revenueReports = revenueReportService.GetRevenueReports( startDate, endDate);
+            List<RevenueReport> revenueReports = revenueReportService.GetRevenueReports(startDate, endDate);
             return revenueReports;
         }
         private void DisplayRevenueReports(List<RevenueReport> revenueReports)
@@ -417,7 +417,7 @@ namespace SomerenUI
             DateTime endDate = dateTimePickerEnd.Value;
 
             //invalid
-          if(startDate > endDate)
+            if (startDate > endDate)
             {
                 MessageBox.Show("Start date cannot be after end date.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -425,7 +425,7 @@ namespace SomerenUI
             {
                 MessageBox.Show("End date cannot end in the future.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            if((endDate - startDate).Days < 1)
+            if ((endDate - startDate).Days < 1)
             {
                 MessageBox.Show("PLease have a range date of atleast one to proceed.", "Invalid Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
