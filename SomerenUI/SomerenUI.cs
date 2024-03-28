@@ -37,7 +37,7 @@ namespace SomerenUI
             pnlRoom.Hide();
             pnlReport.Hide();
             pnlDashboard.Hide();
-
+            pnldrinkorder.Hide();
 
         }
 
@@ -451,6 +451,127 @@ namespace SomerenUI
             }
             List<RevenueReport> revenueReports = GetRevenueReports(startDate, endDate);
             DisplayRevenueReports(revenueReports);
+        }
+
+        //===================================================Order
+
+        private void DisplayDrinkingOrder(List<Student> students, List<Drink> drinks)
+        {
+            listViewdrinkorder.Items.Clear();
+
+            foreach (var drink in drinks)
+            {
+                ListViewItem list = new ListViewItem(drink.Id.ToString());
+                list.Tag = drink;
+                list.SubItems.Add(drink.DrinkName.ToString());
+                list.SubItems.Add(drink.Price.ToString());
+                list.SubItems.Add(drink.TypeDrink.ToString());
+                list.SubItems.Add(drink.Stock.ToString());
+                listViewdrinkorder.Items.Add(list);
+            }
+
+            listviewnamesstudent.Items.Clear();
+
+            foreach (var student in students)
+            {
+                ListViewItem list = new ListViewItem(student.Number.ToString());
+                list.Tag = student;
+                list.SubItems.Add(student.FirstName.ToString());
+                list.SubItems.Add(student.LastName.ToString());
+                listviewnamesstudent.Items.Add(list);
+            }
+        }
+
+        private void ShowDrinkOrderPanel()
+        {
+            pnlStudents.Hide();
+            pnlLecturers.Hide();
+            pnlDrinks.Hide();
+            pnlRoom.Hide();
+            pnlReport.Hide();
+            pnlDashboard.Hide();
+
+            pnldrinkorder.Show();
+            try
+            {
+                // getting the students form the GetStudents method and sending it to the list and then displaying in cash register
+                List<Student> students = GetStudents();
+                List<Drink> drink = GetDrinks();
+                DisplayDrinkingOrder(students, drink);
+            }
+            catch (Exception e)
+            {
+                // show error message box if there is an error
+                MessageBox.Show("There is something wrong happen while order drink" + e.Message);
+            }
+        }
+        private List<Student> listOfstudents;
+        private List<Drink> listOfdrinks;
+        private OrderService orderService = new OrderService();
+
+        private void btncheckout_Click(object sender, EventArgs e)
+        {
+            if (listviewnamesstudent.SelectedItems == null || listviewnamesstudent.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select your student.");
+                return;
+            }
+
+            if (listViewdrinkorder.SelectedItems == null || listViewdrinkorder.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select a drink.");
+                return;
+            }
+
+            int studentID = int.Parse(listviewnamesstudent.SelectedItems[0].SubItems[0].Text);
+            int drinkID = int.Parse(listViewdrinkorder.SelectedItems[0].SubItems[0].Text);
+
+            Order order = new Order();
+            order.studentID = studentID;
+            order.drinkID = drinkID;
+
+            string input = txtTotalAmount.Text;
+            int numberOfDrink;
+            if (!int.TryParse(input, out numberOfDrink))
+            {
+                MessageBox.Show("You entered an invalid quantity.");
+                return;
+            }
+
+            Drink selectedDrink = orderService.GetDrinkById(drinkID); // You need to implement this method
+
+            if (selectedDrink == null)
+            {
+                MessageBox.Show("Unable to retrieve selected drink.");
+                return;
+            }
+
+            // Calculate the total cost using the retrieved drink's price
+            float priceTotal = selectedDrink.Price * numberOfDrink;
+
+            // Update the order with the calculated total cost
+            order.price = priceTotal;
+
+            // Call the orderService to place the order
+            orderService.OrderDrink(order);
+
+            // Show the success message with the total cost
+            MessageBox.Show($"Order placed successfully. Total Price: {priceTotal}");
+
+            // UnselectListviewItem(listviewnamesstudent);
+            // UnselectListviewItem(listviewnamesstudent);
+        }
+
+        private int numberOfORder = 0;
+        private int KeepTrackOrderID()
+        {
+            numberOfORder++;
+            return numberOfORder;
+        }
+
+        private void drinkOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDrinkOrderPanel();
         }
     }
 }
