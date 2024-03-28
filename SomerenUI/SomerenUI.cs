@@ -555,6 +555,8 @@ namespace SomerenUI
             // Call the orderService to place the order
             orderService.OrderDrink(order);
 
+            orderService.UpdateDrinkStock(drinkID, numberOfDrink); // You need to implement this method
+
             // Show the success message with the total cost
             MessageBox.Show($"Order placed successfully. Total Price: {priceTotal}");
 

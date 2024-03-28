@@ -32,5 +32,12 @@ namespace SomerenService
             return orderdb.GetDrinkById(drinkId);
         }
 
+        public void UpdateDrinkStock(int drinkID, int quantity)
+        {
+            // Call the appropriate method in your Data Access Layer (DAL) to update the stock amount
+            // You will need to implement this method in your DAL
+            orderdb.UpdateDrinkStock(drinkID, quantity);
+        }
+
     }
 }

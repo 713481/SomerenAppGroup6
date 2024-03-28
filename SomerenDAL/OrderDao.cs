@@ -73,5 +73,21 @@ namespace SomerenDAL
             }
             return null;
         }
+
+        public void UpdateDrinkStock(int drinkID, int quantity)
+        {
+            // Define your SQL query to update the stock amount
+            string query = "UPDATE drink SET Stock = Stock - @Quantity WHERE DrinkID = @DrinkID";
+
+            // Provide parameters for the query
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+        new SqlParameter("@Quantity", quantity),
+        new SqlParameter("@DrinkID", drinkID)
+            };
+
+            // Execute the query to update the stock amount
+            ExecuteEditQuery(query, sqlParameters);
+        }
     }
 }
