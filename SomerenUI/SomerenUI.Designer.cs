@@ -39,6 +39,7 @@
             roomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             drinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             revenueReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            drinkOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             pnlDashboard = new System.Windows.Forms.Panel();
             lblDashboard = new System.Windows.Forms.Label();
             pnlRoom = new System.Windows.Forms.Panel();
@@ -53,6 +54,7 @@
             pnlStudents = new System.Windows.Forms.Panel();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             listViewStudents = new System.Windows.Forms.ListView();
+            studentNumber = new System.Windows.Forms.ColumnHeader();
             firstName = new System.Windows.Forms.ColumnHeader();
             lastName = new System.Windows.Forms.ColumnHeader();
             phoneNumber = new System.Windows.Forms.ColumnHeader();
@@ -104,7 +106,20 @@
             columnHeader7 = new System.Windows.Forms.ColumnHeader();
             columnHeader8 = new System.Windows.Forms.ColumnHeader();
             lblRoom = new System.Windows.Forms.Label();
-            studentNumber = new System.Windows.Forms.ColumnHeader();
+            pnldrinkorder = new System.Windows.Forms.Panel();
+            btncheckout = new System.Windows.Forms.Button();
+            txtTotalAmount = new System.Windows.Forms.TextBox();
+            label11 = new System.Windows.Forms.Label();
+            listViewdrinkorder = new System.Windows.Forms.ListView();
+            drink = new System.Windows.Forms.ColumnHeader();
+            DrinkNameOrder = new System.Windows.Forms.ColumnHeader();
+            drinkprice = new System.Windows.Forms.ColumnHeader();
+            drinktype = new System.Windows.Forms.ColumnHeader();
+            listviewnamesstudent = new System.Windows.Forms.ListView();
+            student = new System.Windows.Forms.ColumnHeader();
+            name = new System.Windows.Forms.ColumnHeader();
+            anothername = new System.Windows.Forms.ColumnHeader();
+            lblDrinkOrder = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlRoom.SuspendLayout();
@@ -118,12 +133,13 @@
             pnlDrinks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            pnldrinkorder.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem, drinksToolStripMenuItem, revenueReportToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem, drinksToolStripMenuItem, revenueReportToolStripMenuItem, drinkOrderToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
@@ -192,6 +208,13 @@
             revenueReportToolStripMenuItem.Size = new System.Drawing.Size(128, 24);
             revenueReportToolStripMenuItem.Text = "Revenue Report";
             revenueReportToolStripMenuItem.Click += revenueReportToolStripMenuItem_Click;
+            // 
+            // drinkOrderToolStripMenuItem
+            // 
+            drinkOrderToolStripMenuItem.Name = "drinkOrderToolStripMenuItem";
+            drinkOrderToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
+            drinkOrderToolStripMenuItem.Text = "Drink Order";
+            drinkOrderToolStripMenuItem.Click += drinkOrderToolStripMenuItem_Click;
             // 
             // pnlDashboard
             // 
@@ -309,6 +332,11 @@
             listViewStudents.TabIndex = 1;
             listViewStudents.UseCompatibleStateImageBehavior = false;
             listViewStudents.View = System.Windows.Forms.View.Details;
+            // 
+            // studentNumber
+            // 
+            studentNumber.Text = "StudentID";
+            studentNumber.Width = 100;
             // 
             // firstName
             // 
@@ -586,6 +614,7 @@
             // listViewDrinks
             // 
             listViewDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { DrinkId, DrinkName, TypeDrink, Price, VAT, Stock, Sold, StockWarning });
+            listViewDrinks.FullRowSelect = true;
             listViewDrinks.Location = new System.Drawing.Point(15, 56);
             listViewDrinks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             listViewDrinks.Name = "listViewDrinks";
@@ -700,10 +729,124 @@
             lblRoom.TabIndex = 0;
             lblRoom.Text = "Room";
             // 
-            // studentNumber
+            // pnldrinkorder
             // 
-            studentNumber.Text = "StudentID";
-            studentNumber.Width = 100;
+            pnldrinkorder.Controls.Add(btncheckout);
+            pnldrinkorder.Controls.Add(txtTotalAmount);
+            pnldrinkorder.Controls.Add(label11);
+            pnldrinkorder.Controls.Add(listViewdrinkorder);
+            pnldrinkorder.Controls.Add(listviewnamesstudent);
+            pnldrinkorder.Controls.Add(lblDrinkOrder);
+            pnldrinkorder.Location = new System.Drawing.Point(3, 41);
+            pnldrinkorder.Name = "pnldrinkorder";
+            pnldrinkorder.Size = new System.Drawing.Size(1078, 629);
+            pnldrinkorder.TabIndex = 3;
+            // 
+            // btncheckout
+            // 
+            btncheckout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btncheckout.Location = new System.Drawing.Point(306, 535);
+            btncheckout.Name = "btncheckout";
+            btncheckout.Size = new System.Drawing.Size(172, 44);
+            btncheckout.TabIndex = 14;
+            btncheckout.Text = "Checkout";
+            btncheckout.UseVisualStyleBackColor = true;
+            btncheckout.Click += btncheckout_Click;
+            // 
+            // txtTotalAmount
+            // 
+            txtTotalAmount.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            txtTotalAmount.Location = new System.Drawing.Point(374, 476);
+            txtTotalAmount.Margin = new System.Windows.Forms.Padding(2);
+            txtTotalAmount.Name = "txtTotalAmount";
+            txtTotalAmount.Size = new System.Drawing.Size(121, 30);
+            txtTotalAmount.TabIndex = 13;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label11.Location = new System.Drawing.Point(262, 478);
+            label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(87, 28);
+            label11.TabIndex = 12;
+            label11.Text = "Amount:";
+            // 
+            // listViewdrinkorder
+            // 
+            listViewdrinkorder.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listViewdrinkorder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { drink, DrinkNameOrder, drinkprice, drinktype });
+            listViewdrinkorder.FullRowSelect = true;
+            listViewdrinkorder.Location = new System.Drawing.Point(374, 96);
+            listViewdrinkorder.Margin = new System.Windows.Forms.Padding(2);
+            listViewdrinkorder.Name = "listViewdrinkorder";
+            listViewdrinkorder.Size = new System.Drawing.Size(685, 270);
+            listViewdrinkorder.TabIndex = 9;
+            listViewdrinkorder.UseCompatibleStateImageBehavior = false;
+            listViewdrinkorder.View = System.Windows.Forms.View.Details;
+            // 
+            // drink
+            // 
+            drink.Text = "Drink ID";
+            drink.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            drink.Width = 100;
+            // 
+            // DrinkNameOrder
+            // 
+            DrinkNameOrder.Text = "Drink Name";
+            DrinkNameOrder.Width = 150;
+            // 
+            // drinkprice
+            // 
+            drinkprice.Text = "Drink Price";
+            drinkprice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            drinkprice.Width = 150;
+            // 
+            // drinktype
+            // 
+            drinktype.Text = "Drink Type";
+            drinktype.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            drinktype.Width = 150;
+            // 
+            // listviewnamesstudent
+            // 
+            listviewnamesstudent.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listviewnamesstudent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { student, name, anothername });
+            listviewnamesstudent.FullRowSelect = true;
+            listviewnamesstudent.Location = new System.Drawing.Point(26, 96);
+            listviewnamesstudent.Margin = new System.Windows.Forms.Padding(2);
+            listviewnamesstudent.Name = "listviewnamesstudent";
+            listviewnamesstudent.Size = new System.Drawing.Size(323, 270);
+            listviewnamesstudent.TabIndex = 8;
+            listviewnamesstudent.UseCompatibleStateImageBehavior = false;
+            listviewnamesstudent.View = System.Windows.Forms.View.Details;
+            // 
+            // student
+            // 
+            student.Text = "Student ID";
+            student.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            student.Width = 100;
+            // 
+            // name
+            // 
+            name.Text = "First Name";
+            name.Width = 150;
+            // 
+            // anothername
+            // 
+            anothername.Text = "Last Name";
+            anothername.Width = 150;
+            // 
+            // lblDrinkOrder
+            // 
+            lblDrinkOrder.AutoSize = true;
+            lblDrinkOrder.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblDrinkOrder.Location = new System.Drawing.Point(29, 23);
+            lblDrinkOrder.Name = "lblDrinkOrder";
+            lblDrinkOrder.Size = new System.Drawing.Size(173, 41);
+            lblDrinkOrder.TabIndex = 1;
+            lblDrinkOrder.Text = "Drink Order";
             // 
             // SomerenUI
             // 
@@ -711,6 +854,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1099, 697);
             Controls.Add(menuStrip1);
+            Controls.Add(pnldrinkorder);
             Controls.Add(pnlStudents);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlDrinks);
@@ -742,6 +886,8 @@
             pnlDrinks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            pnldrinkorder.ResumeLayout(false);
+            pnldrinkorder.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -824,6 +970,21 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
         private System.Windows.Forms.DateTimePicker dateTimePickerStart;
         private System.Windows.Forms.ColumnHeader studentNumber;
+        private System.Windows.Forms.Panel pnldrinkorder;
+        private System.Windows.Forms.Button btncheckout;
+        private System.Windows.Forms.TextBox txtTotalAmount;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ListView listViewdrinkorder;
+        private System.Windows.Forms.ColumnHeader drink;
+        private System.Windows.Forms.ColumnHeader DrinkNameOrder;
+        private System.Windows.Forms.ColumnHeader drinkprice;
+        private System.Windows.Forms.ColumnHeader drinktype;
+        private System.Windows.Forms.ListView listviewnamesstudent;
+        private System.Windows.Forms.ColumnHeader student;
+        private System.Windows.Forms.ColumnHeader name;
+        private System.Windows.Forms.ColumnHeader anothername;
+        private System.Windows.Forms.Label lblDrinkOrder;
+        private System.Windows.Forms.ToolStripMenuItem drinkOrderToolStripMenuItem;
         //private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }
