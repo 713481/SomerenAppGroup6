@@ -38,6 +38,7 @@ namespace SomerenUI
             pnlReport.Hide();
             pnlDashboard.Hide();
             pnldrinkorder.Hide();
+            pnlParticipant.Hide();
 
         }
 
@@ -574,6 +575,160 @@ namespace SomerenUI
         private void drinkOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowDrinkOrderPanel();
+        }
+
+
+        //=========================================================> Participation
+        private void ShowParticipationPanel()
+        {
+            pnlStudents.Hide();
+            pnlLecturers.Hide();
+            pnlDrinks.Hide();
+            pnlRoom.Hide();
+            pnlReport.Hide();
+            pnlDashboard.Hide();
+            pnldrinkorder.Hide();
+
+            pnlParticipant.Show();
+
+            try
+            {
+                List<StudentParticipation> getParticipant = GetParticipation();
+                List<StudentParticipation> notParticipation = GetNonParticipation();
+                DisplayStudentParticipant(getParticipant, notParticipation);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        public void DisplayStudentParticipant(List<StudentParticipation> participations, List<StudentParticipation> nonParticipations)
+        {
+            listViewParticipant.Items.Clear();
+            foreach (var participent in participations)
+            {
+                ListViewItem list = new ListViewItem(participent.activityID.ToString());
+                list.Tag = participent;
+                list.SubItems.Add(participent.activityName.ToString());
+                list.SubItems.Add(participent.studentID.ToString());
+                list.SubItems.Add(participent.firstName.ToString());
+                listViewParticipant.Items.Add(list);
+            }
+
+            listViewNotParticipation.Items.Clear();
+            foreach (var nonParticipation in nonParticipations)
+            {
+                ListViewItem list = new ListViewItem(nonParticipation.studentID.ToString());
+                list.Tag = nonParticipation;
+                list.SubItems.Add(nonParticipation.firstName.ToString());
+                list.SubItems.Add(nonParticipation.lastName.ToString());
+                listViewNotParticipation.Items.Add(list);
+            }
+        }
+
+        private List<StudentParticipation> GetParticipation()
+        {
+            StudentParticipationService participationService = new StudentParticipationService();
+            List<StudentParticipation> participations = participationService.GetStudentParticipations();
+            return participations;
+        }
+
+        private List<StudentParticipation> GetNonParticipation()
+        {
+            StudentParticipationService nonParticipationService = new StudentParticipationService();
+            List<StudentParticipation> participations = nonParticipationService.GetNonStudentParticipation();
+            return participations;
+        }
+
+        private void participationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowParticipationPanel();
+        }
+
+        private void btbAdd_Click(object sender, EventArgs e)
+        {
+            if (listViewNotParticipation.SelectedItems == null || listViewNotParticipation.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select your student id");
+                return;
+            }
+
+            if (listViewParticipant.SelectedItems == null || listViewParticipant.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select a activity id");
+                return;
+            }
+            int studentID = int.Parse(listViewNotParticipation.SelectedItems[0].SubItems[0].Text);
+            int activityID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[0].Text);
+
+            if (activityID != null && studentID != null)
+            {
+                StudentParticipationService participationService = new StudentParticipationService();
+                participationService.AddStudentParticipant(studentID, activityID);
+            }
+            else
+            {
+                MessageBox.Show("Please select both an activity and a student.");
+            }
+        }
+
+        private void btbRemove_Click(object sender, EventArgs e)
+        {
+            if (listViewParticipant.SelectedItems == null || listViewParticipant.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select a participant to remove.");
+                return;
+            }
+
+            int studentID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[2].Text);
+            int activityID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[0].Text);
+
+            DialogResult result = MessageBox.Show("Are you sure you wish to remove this participant?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    StudentParticipationService participantService = new StudentParticipationService();
+                    participantService.RemoveStudentParticipant(studentID, activityID);
+
+                    // Refresh the listview to reflect the changes
+                    RefreshParticipantListView();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error removing participant: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void RefreshParticipantListView()
+        {
+            // Clear the existing items in the listview
+            listViewParticipant.Items.Clear();
+
+            try
+            {
+                // Retrieve the updated participant data from the database using your service method
+                StudentParticipationService participantService = new StudentParticipationService();
+                List<StudentParticipation> participants = participantService.GetStudentParticipations();
+
+                // Populate the listview with the updated participant data
+                foreach (var participant in participants)
+                {
+                    ListViewItem list = new ListViewItem(participant.activityID.ToString());
+                    list.Tag = participant;
+                    list.SubItems.Add(participant.activityName.ToString());
+                    list.SubItems.Add(participant.studentID.ToString());
+                    list.SubItems.Add(participant.firstName.ToString());
+                    listViewParticipant.Items.Add(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error refreshing participant list: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
