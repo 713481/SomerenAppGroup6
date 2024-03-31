@@ -492,6 +492,7 @@ namespace SomerenUI
             pnlRoom.Hide();
             pnlReport.Hide();
             pnlDashboard.Hide();
+            pnlParticipant.Hide();
 
             pnldrinkorder.Show();
             try
@@ -555,7 +556,7 @@ namespace SomerenUI
             order.price = priceTotal;
 
             // Call the orderService to place the order
-            orderService.OrderDrink(order);
+            orderService.OrderDrink(order, numberOfDrink, studentID);
 
             orderService.UpdateDrinkStock(drinkID, numberOfDrink); // You need to implement this method
 

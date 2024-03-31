@@ -36,16 +36,17 @@ namespace SomerenDAL
             return orders;
         }
 
-        public void DrinkOrder(Order order)
+        public void DrinkOrder(Order order, int countOrder, int studentId)
         {
-            string query = "INSERT INTO [order] (DateTime, price, drinkid, studentID) VALUES (@DateTime, @Price, @DrinkID, @StudentID)";
+            string query = "INSERT INTO [order] (DateTime, price, drinkid, studentID, CountOrder) VALUES (@DateTime, @Price, @DrinkID, @StudentID, @countOrder)";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                new SqlParameter("@DateTime", DateTime.Now),
                new SqlParameter("@Price", order.price),
                new SqlParameter("@DrinkID", order.drinkID),
-               new SqlParameter("@StudentID", order.studentID)
+               new SqlParameter("@StudentID", order.studentID),
+               new SqlParameter("@countOrder", order.sales)
             };
 
             ExecuteEditQuery(query, sqlParameters);
