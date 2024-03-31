@@ -27,7 +27,7 @@ namespace SomerenService
             return supervisors;
         }
 
-        public List<Supervisor> GetAllSupervisedActivities()
+        public List<Supervisor> GetSupervisorActivities()
         {
             List<Supervisor> activities = supervisordb.GetSupervisorActivities();
             return activities;

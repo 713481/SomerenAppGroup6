@@ -11,26 +11,22 @@ namespace SomerenDAL
 {
     public class SupervisorDao : BaseDao
     {
-      
-        public List<Supervisor> GetNotSupervisor(Supervisor activity)
-        {
-            string query = "SELECT DISTINCT s.LecturerId, lecturer.FirstName, lecturer.LastName " +
-               "FROM supervise AS s " +
-               "JOIN lecturer ON s.LecturerId = lecturer.LecturerId " +
-               "JOIN activity ON activity.ActivityId = s.ActivityId " +
-               "WHERE s.LecturerId NOT IN (" +
-               "    SELECT s.LecturerId FROM s WHERE ActivityID = @ActivityId)";
-            SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@ActivityId", activity.ActivityID);
-            return ReadSupervisors(ExecuteSelectQuery(query, sqlParameters));
-        }
+
         public List<Supervisor> GetSupervisor(Supervisor activity)
         {
-            string query = "SELECT s.lecturerID, lecturer.FirstName, lecturer.LastName FROM supervise AS s " +
-               "JOIN lecturer ON s.lecturerID = lecturer.LecturerID " +
-               "JOIN activity ON activity.ActivityID = s.ActivityID WHERE s.ActivityID = @ActivityID";
+            string query = "SELECT supervise.lecturerID, lecturer.FirstName, lecturer.LastName FROM supervise " +
+                "JOIN lecturer ON supervise.lecturerID = lecturer.LecturerID " +
+                "JOIN activity ON activity.ActivityID = supervise.activityID " +
+                "WHERE supervise.activityID=@ActivityID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@ActivityId", activity.ActivityID);
+            sqlParameters[0] = new SqlParameter("@ActivityID", activity.ActivityID);
+            return ReadSupervisors(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public List<Supervisor> GetNotSupervisor(Supervisor activity)
+        {
+            string query = "SELECT DISTINCT SUPERVISE.LecturerId, LECTURER.firstName, LECTURER.lastName FROM SUPERVISE\r\nJOIN LECTURER ON SUPERVISE.LecturerId = LECTURER.LecturerId\r\nJOIN ACTIVITIES ON ACTIVITIES.ActivityId = SUPERVISE.ActivityId\r\nWHERE SUPERVISE.LecturerId not in (SELECT SUPERVISE.LecturerId FROM SUPERVISE WHERE ActivityID =@ActivityId)";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@ActivityId", activity.ActivityId);
             return ReadSupervisors(ExecuteSelectQuery(query, sqlParameters));
         }
         private List<Supervisor> ReadSupervisors(DataTable dataTable)
@@ -41,9 +37,9 @@ namespace SomerenDAL
             {
                 Supervisor supervisor = new Supervisor()
                 {
-                    LecturerID = (int)dr["LecturerId"],
-                    FirstName = dr["FirstName"].ToString(),
-                    LastName = dr["LastName"].ToString(),
+                    LecturerId = (int)dr["LecturerId"],
+                    firstName = dr["FirstName"].ToString(),
+                    lastName = dr["LastName"].ToString(),
                 };
 
                 supervisors.Add(supervisor);
@@ -66,7 +62,7 @@ namespace SomerenDAL
             {
                 Supervisor activity = new Supervisor()
                 {
-                    ActivityID = (int)dr["ActivityID"],
+                    ActivityId = (int)dr["ActivityID"],
                     activityName = dr["ActivityName"].ToString(),
                     Date = (DateTime)dr["ActivityDate"]
                 };

@@ -8,11 +8,12 @@ namespace SomerenModel
 {
     public class Supervisor
     {
-        public int LecturerID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int LecturerId { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
         public int ActivityID { get; set; }
         public string activityName { get; set; }
         public DateTime Date { get; set; }
+     
     }
 }
