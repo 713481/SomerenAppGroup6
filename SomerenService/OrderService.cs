@@ -23,9 +23,9 @@ namespace SomerenService
             return orders;
         }
 
-        public void OrderDrink(Order order)
+        public void OrderDrink(Order order, int countOrder, int studentid)
         {
-            orderdb.DrinkOrder(order);
+            orderdb.DrinkOrder(order, countOrder, studentid);
         }
         public Drink GetDrinkById(int drinkId)
         {
