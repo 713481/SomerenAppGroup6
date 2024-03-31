@@ -740,14 +740,121 @@ namespace SomerenUI
             pnlSupervisorActivity.Show();
 
 
+            try
+            {
+                DisplaySupervisorActivities();
+                DisplayNotSupervisors();
+                DisplaySupervisors();
+
+            }
+
+            catch (Exception e)
+            {
+                // show error message box if there is an error
+                MessageBox.Show("Something went wrong while loading the supervisor page: " + e.Message);
+            }
 
 
         }
+        private List<Supervisor> GetSupervisedActivities()
+        {
+            SupervisorService supervisorsService = new SupervisorService();
+            List<Supervisor> supervisors = supervisorsService.GetSupervisorActivities();
+            return supervisors;
+        }
+        private void DisplaySupervisorActivities()
+        {
+            // clear the listview before filling it
+            listViewActivityShow.Items.Clear();
+            List<Supervisor> activities = GetSupervisedActivities();
+
+            foreach (Supervisor activity in activities)
+            {
+                ListViewItem li = new ListViewItem(activity.activityName.ToString());
+                li.SubItems.Add($"{activity.Date:dd/MM/yyyy}");
+                li.Tag = activity;
+                
+
+                listViewActivityShow.Items.Add(li);
+            }
+        }
+
+        private ListViewItem listViewItem = null;
+        private Supervisor selectedSupervisor = null;
+        private Supervisor selectedActivity = null;
+
+        private List<Supervisor> GetSupervisors()
+        {
+            SupervisorService supervisorsService = new SupervisorService();
+            List<Supervisor> supervisors = supervisorsService.GetSupervisors(selectedActivity);
+            return supervisors;
+        }
+        private List<Supervisor> GetNotSupervisors()
+        {
+            SupervisorService supervisorsService = new SupervisorService();
+            List<Supervisor> supervisors = supervisorsService.GetNotSupervisors(selectedActivity);
+            return supervisors;
+        }
+
+        private void DisplayNotSupervisors()
+        {
+
+            listViewSupervisorNot.Items.Clear();
+
+            List<Supervisor> supervisors = GetNotSupervisors();
+
+            foreach (Supervisor supervisor in supervisors)
+            {
+                ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
+                li.SubItems.Add(supervisor.lastName.ToString());
+                li.Tag = supervisor;
+                
+
+                listViewSupervisorNot.Items.Add(li);
+            }
+        }
+        private void DisplaySupervisors()
+        {
+
+            listViewSupervisorIs.Items.Clear();
+
+            List<Supervisor> supervisors = GetSupervisors();
+
+            foreach (Supervisor supervisor in supervisors)
+            {
+                ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
+                li.SubItems.Add(supervisor.lastName.ToString());
+                li.SubItems.Add(supervisor.activityName.ToString());
+                li.Tag = supervisor;              
+                listViewSupervisorIs.Items.Add(li);
+            }
+        }
+
 
 
         private void supervisorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowSupervisorPanel();
+        }
+
+        private void btnAddSupervisor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemoveSupervisor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUpdateSupervisor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listViewSupervisorNot_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

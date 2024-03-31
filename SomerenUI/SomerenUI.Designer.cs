@@ -141,15 +141,18 @@
             FirstName1 = new System.Windows.Forms.ColumnHeader();
             Participant = new System.Windows.Forms.Label();
             pnlSupervisorActivity = new System.Windows.Forms.Panel();
+            label9 = new System.Windows.Forms.Label();
+            label8 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
             btnUpdateSupervisor = new System.Windows.Forms.Button();
-            listViewSupervisorNot = new System.Windows.Forms.ListView();
+            listViewSupervisorIs = new System.Windows.Forms.ListView();
             SuperviseActFName = new System.Windows.Forms.ColumnHeader();
             SuperviseActLName = new System.Windows.Forms.ColumnHeader();
             ActivitySupervise = new System.Windows.Forms.ColumnHeader();
             pictureBoxxxx = new System.Windows.Forms.PictureBox();
             btnRemoveSupervisor = new System.Windows.Forms.Button();
             btnAddSupervisor = new System.Windows.Forms.Button();
-            listViewSupervisorIs = new System.Windows.Forms.ListView();
+            listViewSupervisorNot = new System.Windows.Forms.ListView();
             supervisorFirstName = new System.Windows.Forms.ColumnHeader();
             SupervisorLastName = new System.Windows.Forms.ColumnHeader();
             listViewActivityShow = new System.Windows.Forms.ListView();
@@ -1050,12 +1053,15 @@
             // 
             // pnlSupervisorActivity
             // 
+            pnlSupervisorActivity.Controls.Add(label9);
+            pnlSupervisorActivity.Controls.Add(label8);
+            pnlSupervisorActivity.Controls.Add(label7);
             pnlSupervisorActivity.Controls.Add(btnUpdateSupervisor);
-            pnlSupervisorActivity.Controls.Add(listViewSupervisorNot);
+            pnlSupervisorActivity.Controls.Add(listViewSupervisorIs);
             pnlSupervisorActivity.Controls.Add(pictureBoxxxx);
             pnlSupervisorActivity.Controls.Add(btnRemoveSupervisor);
             pnlSupervisorActivity.Controls.Add(btnAddSupervisor);
-            pnlSupervisorActivity.Controls.Add(listViewSupervisorIs);
+            pnlSupervisorActivity.Controls.Add(listViewSupervisorNot);
             pnlSupervisorActivity.Controls.Add(listViewActivityShow);
             pnlSupervisorActivity.Controls.Add(label77);
             pnlSupervisorActivity.Location = new System.Drawing.Point(3, 52);
@@ -1063,25 +1069,57 @@
             pnlSupervisorActivity.Size = new System.Drawing.Size(1146, 622);
             pnlSupervisorActivity.TabIndex = 25;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label9.Location = new System.Drawing.Point(691, 86);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(96, 23);
+            label9.TabIndex = 29;
+            label9.Text = "Supervisors";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label8.Location = new System.Drawing.Point(384, 86);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(65, 23);
+            label8.TabIndex = 28;
+            label8.Text = "Activity";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label7.Location = new System.Drawing.Point(56, 89);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(130, 23);
+            label7.TabIndex = 27;
+            label7.Text = "Not Supervisors";
+            // 
             // btnUpdateSupervisor
             // 
-            btnUpdateSupervisor.Location = new System.Drawing.Point(316, 344);
+            btnUpdateSupervisor.Location = new System.Drawing.Point(308, 383);
             btnUpdateSupervisor.Name = "btnUpdateSupervisor";
             btnUpdateSupervisor.Size = new System.Drawing.Size(150, 42);
             btnUpdateSupervisor.TabIndex = 26;
             btnUpdateSupervisor.Text = "Update";
             btnUpdateSupervisor.UseVisualStyleBackColor = true;
+            btnUpdateSupervisor.Click += btnUpdateSupervisor_Click;
             // 
-            // listViewSupervisorNot
+            // listViewSupervisorIs
             // 
-            listViewSupervisorNot.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { SuperviseActFName, SuperviseActLName, ActivitySupervise });
-            listViewSupervisorNot.FullRowSelect = true;
-            listViewSupervisorNot.Location = new System.Drawing.Point(537, 75);
-            listViewSupervisorNot.Name = "listViewSupervisorNot";
-            listViewSupervisorNot.Size = new System.Drawing.Size(326, 240);
-            listViewSupervisorNot.TabIndex = 25;
-            listViewSupervisorNot.UseCompatibleStateImageBehavior = false;
-            listViewSupervisorNot.View = System.Windows.Forms.View.Details;
+            listViewSupervisorIs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { SuperviseActFName, SuperviseActLName, ActivitySupervise });
+            listViewSupervisorIs.FullRowSelect = true;
+            listViewSupervisorIs.Location = new System.Drawing.Point(577, 121);
+            listViewSupervisorIs.Name = "listViewSupervisorIs";
+            listViewSupervisorIs.Size = new System.Drawing.Size(339, 240);
+            listViewSupervisorIs.TabIndex = 25;
+            listViewSupervisorIs.UseCompatibleStateImageBehavior = false;
+            listViewSupervisorIs.View = System.Windows.Forms.View.Details;
+            listViewSupervisorIs.SelectedIndexChanged += listViewSupervisorNot_SelectedIndexChanged;
             // 
             // SuperviseActFName
             // 
@@ -1109,32 +1147,34 @@
             // 
             // btnRemoveSupervisor
             // 
-            btnRemoveSupervisor.Location = new System.Drawing.Point(627, 344);
+            btnRemoveSupervisor.Location = new System.Drawing.Point(637, 372);
             btnRemoveSupervisor.Name = "btnRemoveSupervisor";
             btnRemoveSupervisor.Size = new System.Drawing.Size(150, 42);
             btnRemoveSupervisor.TabIndex = 22;
             btnRemoveSupervisor.Text = "Remove Supervisor";
             btnRemoveSupervisor.UseVisualStyleBackColor = true;
+            btnRemoveSupervisor.Click += btnRemoveSupervisor_Click;
             // 
             // btnAddSupervisor
             // 
-            btnAddSupervisor.Location = new System.Drawing.Point(63, 337);
+            btnAddSupervisor.Location = new System.Drawing.Point(56, 372);
             btnAddSupervisor.Name = "btnAddSupervisor";
             btnAddSupervisor.Size = new System.Drawing.Size(150, 49);
             btnAddSupervisor.TabIndex = 23;
             btnAddSupervisor.Text = "Add Supervisor";
             btnAddSupervisor.UseVisualStyleBackColor = true;
+            btnAddSupervisor.Click += btnAddSupervisor_Click;
             // 
-            // listViewSupervisorIs
+            // listViewSupervisorNot
             // 
-            listViewSupervisorIs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { supervisorFirstName, SupervisorLastName });
-            listViewSupervisorIs.FullRowSelect = true;
-            listViewSupervisorIs.Location = new System.Drawing.Point(41, 75);
-            listViewSupervisorIs.Name = "listViewSupervisorIs";
-            listViewSupervisorIs.Size = new System.Drawing.Size(206, 240);
-            listViewSupervisorIs.TabIndex = 22;
-            listViewSupervisorIs.UseCompatibleStateImageBehavior = false;
-            listViewSupervisorIs.View = System.Windows.Forms.View.Details;
+            listViewSupervisorNot.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { supervisorFirstName, SupervisorLastName });
+            listViewSupervisorNot.FullRowSelect = true;
+            listViewSupervisorNot.Location = new System.Drawing.Point(44, 121);
+            listViewSupervisorNot.Name = "listViewSupervisorNot";
+            listViewSupervisorNot.Size = new System.Drawing.Size(206, 240);
+            listViewSupervisorNot.TabIndex = 22;
+            listViewSupervisorNot.UseCompatibleStateImageBehavior = false;
+            listViewSupervisorNot.View = System.Windows.Forms.View.Details;
             // 
             // supervisorFirstName
             // 
@@ -1150,10 +1190,10 @@
             // 
             listViewActivityShow.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ActivityNameShowss, ActivityDateWhen });
             listViewActivityShow.FullRowSelect = true;
-            listViewActivityShow.Location = new System.Drawing.Point(276, 75);
+            listViewActivityShow.Location = new System.Drawing.Point(271, 121);
             listViewActivityShow.MultiSelect = false;
             listViewActivityShow.Name = "listViewActivityShow";
-            listViewActivityShow.Size = new System.Drawing.Size(232, 240);
+            listViewActivityShow.Size = new System.Drawing.Size(277, 240);
             listViewActivityShow.TabIndex = 1;
             listViewActivityShow.UseCompatibleStateImageBehavior = false;
             listViewActivityShow.View = System.Windows.Forms.View.Details;
@@ -1166,6 +1206,7 @@
             // ActivityDateWhen
             // 
             ActivityDateWhen.Text = "Date";
+            ActivityDateWhen.Width = 100;
             // 
             // label77
             // 
@@ -1345,7 +1386,7 @@
         private System.Windows.Forms.PictureBox pictureBoxxxx;
         private System.Windows.Forms.Button btnRemoveSupervisor;
         private System.Windows.Forms.Button btnAddSupervisor;
-        private System.Windows.Forms.ListView listViewSupervisorIs;
+        private System.Windows.Forms.ListView listViewSupervisorNot;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader supervisorFirstName;
         private System.Windows.Forms.ColumnHeader SupervisorLastName;
@@ -1356,12 +1397,15 @@
         private System.Windows.Forms.ColumnHeader columnHeader17;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Button btnUpdateSupervisor;
-        private System.Windows.Forms.ListView listViewSupervisorNot;
+        private System.Windows.Forms.ListView listViewSupervisorIs;
         private System.Windows.Forms.ColumnHeader SuperviseActFName;
         private System.Windows.Forms.ColumnHeader SuperviseActLName;
         private System.Windows.Forms.ToolStripMenuItem supervisorToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader ActivityDateWhen;
         private System.Windows.Forms.ColumnHeader ActivitySupervise;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
         //private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }
