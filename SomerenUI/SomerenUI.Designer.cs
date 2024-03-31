@@ -40,6 +40,7 @@
             drinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             revenueReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             drinkOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            participationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             pnlDashboard = new System.Windows.Forms.Panel();
             lblDashboard = new System.Windows.Forms.Label();
             pnlRoom = new System.Windows.Forms.Panel();
@@ -124,6 +125,20 @@
             columnHeader7 = new System.Windows.Forms.ColumnHeader();
             columnHeader8 = new System.Windows.Forms.ColumnHeader();
             lblRoom = new System.Windows.Forms.Label();
+            pnlParticipant = new System.Windows.Forms.Panel();
+            pictureBox7 = new System.Windows.Forms.PictureBox();
+            btbRemove = new System.Windows.Forms.Button();
+            btbAdd = new System.Windows.Forms.Button();
+            listViewNotParticipation = new System.Windows.Forms.ListView();
+            NonJoinID = new System.Windows.Forms.ColumnHeader();
+            NonJoinFirstName = new System.Windows.Forms.ColumnHeader();
+            NonJoinLastName = new System.Windows.Forms.ColumnHeader();
+            listViewParticipant = new System.Windows.Forms.ListView();
+            ActivityID = new System.Windows.Forms.ColumnHeader();
+            ActivityName = new System.Windows.Forms.ColumnHeader();
+            StudentID = new System.Windows.Forms.ColumnHeader();
+            FirstName1 = new System.Windows.Forms.ColumnHeader();
+            Participant = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlRoom.SuspendLayout();
@@ -138,16 +153,18 @@
             pnlDrinks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            pnlParticipant.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem, drinksToolStripMenuItem, revenueReportToolStripMenuItem, drinkOrderToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem, drinksToolStripMenuItem, revenueReportToolStripMenuItem, drinkOrderToolStripMenuItem, participationToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
-            menuStrip1.Size = new System.Drawing.Size(1099, 30);
+            menuStrip1.Size = new System.Drawing.Size(1161, 30);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -219,6 +236,13 @@
             drinkOrderToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
             drinkOrderToolStripMenuItem.Text = "Drink Order";
             drinkOrderToolStripMenuItem.Click += drinkOrderToolStripMenuItem_Click;
+            // 
+            // participationToolStripMenuItem
+            // 
+            participationToolStripMenuItem.Name = "participationToolStripMenuItem";
+            participationToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
+            participationToolStripMenuItem.Text = "Participation";
+            participationToolStripMenuItem.Click += participationToolStripMenuItem_Click;
             // 
             // pnlDashboard
             // 
@@ -539,10 +563,10 @@
             pnlLecturers.Controls.Add(pictureBox2);
             pnlLecturers.Controls.Add(listviewLecturers);
             pnlLecturers.Controls.Add(label2);
-            pnlLecturers.Location = new System.Drawing.Point(15, 56);
+            pnlLecturers.Location = new System.Drawing.Point(0, 39);
             pnlLecturers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             pnlLecturers.Name = "pnlLecturers";
-            pnlLecturers.Size = new System.Drawing.Size(1072, 615);
+            pnlLecturers.Size = new System.Drawing.Size(1146, 677);
             pnlLecturers.TabIndex = 3;
             pnlLecturers.Paint += pnlLecturers_Paint;
             // 
@@ -890,13 +914,122 @@
             lblRoom.TabIndex = 0;
             lblRoom.Text = "Room";
             // 
+            // pnlParticipant
+            // 
+            pnlParticipant.Controls.Add(pictureBox7);
+            pnlParticipant.Controls.Add(btbRemove);
+            pnlParticipant.Controls.Add(btbAdd);
+            pnlParticipant.Controls.Add(listViewNotParticipation);
+            pnlParticipant.Controls.Add(listViewParticipant);
+            pnlParticipant.Controls.Add(Participant);
+            pnlParticipant.Location = new System.Drawing.Point(0, 42);
+            pnlParticipant.Name = "pnlParticipant";
+            pnlParticipant.Size = new System.Drawing.Size(1149, 674);
+            pnlParticipant.TabIndex = 22;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.Image = (System.Drawing.Image)resources.GetObject("pictureBox7.Image");
+            pictureBox7.Location = new System.Drawing.Point(964, 12);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new System.Drawing.Size(125, 93);
+            pictureBox7.TabIndex = 24;
+            pictureBox7.TabStop = false;
+            // 
+            // btbRemove
+            // 
+            btbRemove.Location = new System.Drawing.Point(627, 406);
+            btbRemove.Name = "btbRemove";
+            btbRemove.Size = new System.Drawing.Size(150, 42);
+            btbRemove.TabIndex = 22;
+            btbRemove.Text = "Remove Participant";
+            btbRemove.UseVisualStyleBackColor = true;
+            btbRemove.Click += btbRemove_Click;
+            // 
+            // btbAdd
+            // 
+            btbAdd.Location = new System.Drawing.Point(112, 399);
+            btbAdd.Name = "btbAdd";
+            btbAdd.Size = new System.Drawing.Size(130, 49);
+            btbAdd.TabIndex = 23;
+            btbAdd.Text = "Add Participant";
+            btbAdd.UseVisualStyleBackColor = true;
+            btbAdd.Click += btbAdd_Click;
+            // 
+            // listViewNotParticipation
+            // 
+            listViewNotParticipation.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { NonJoinID, NonJoinFirstName, NonJoinLastName });
+            listViewNotParticipation.Location = new System.Drawing.Point(599, 74);
+            listViewNotParticipation.Name = "listViewNotParticipation";
+            listViewNotParticipation.Size = new System.Drawing.Size(320, 269);
+            listViewNotParticipation.TabIndex = 22;
+            listViewNotParticipation.UseCompatibleStateImageBehavior = false;
+            listViewNotParticipation.View = System.Windows.Forms.View.Details;
+            // 
+            // NonJoinID
+            // 
+            NonJoinID.Text = "Student ID";
+            NonJoinID.Width = 100;
+            // 
+            // NonJoinFirstName
+            // 
+            NonJoinFirstName.Text = "First Name";
+            NonJoinFirstName.Width = 100;
+            // 
+            // NonJoinLastName
+            // 
+            NonJoinLastName.Text = "Last Name";
+            NonJoinLastName.Width = 100;
+            // 
+            // listViewParticipant
+            // 
+            listViewParticipant.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ActivityID, ActivityName, StudentID, FirstName1 });
+            listViewParticipant.Location = new System.Drawing.Point(43, 74);
+            listViewParticipant.MultiSelect = false;
+            listViewParticipant.Name = "listViewParticipant";
+            listViewParticipant.Size = new System.Drawing.Size(508, 269);
+            listViewParticipant.TabIndex = 1;
+            listViewParticipant.UseCompatibleStateImageBehavior = false;
+            listViewParticipant.View = System.Windows.Forms.View.Details;
+            // 
+            // ActivityID
+            // 
+            ActivityID.Text = "Activity ID";
+            ActivityID.Width = 100;
+            // 
+            // ActivityName
+            // 
+            ActivityName.Text = "Activity Name";
+            ActivityName.Width = 150;
+            // 
+            // StudentID
+            // 
+            StudentID.Text = "Student ID";
+            StudentID.Width = 100;
+            // 
+            // FirstName1
+            // 
+            FirstName1.Text = "First Name";
+            FirstName1.Width = 130;
+            // 
+            // Participant
+            // 
+            Participant.AutoSize = true;
+            Participant.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Participant.Location = new System.Drawing.Point(33, 14);
+            Participant.Name = "Participant";
+            Participant.Size = new System.Drawing.Size(143, 37);
+            Participant.TabIndex = 0;
+            Participant.Text = "Participant";
+            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1099, 697);
+            ClientSize = new System.Drawing.Size(1161, 741);
             Controls.Add(menuStrip1);
             Controls.Add(pnlDashboard);
+            Controls.Add(pnlParticipant);
             Controls.Add(pnldrinkorder);
             Controls.Add(pnlStudents);
             Controls.Add(pnlDrinks);
@@ -930,6 +1063,9 @@
             pnlDrinks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            pnlParticipant.ResumeLayout(false);
+            pnlParticipant.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1031,6 +1167,21 @@
         private System.Windows.Forms.ColumnHeader name;
         private System.Windows.Forms.ColumnHeader anothername;
         private System.Windows.Forms.Label lblDrinkOrder;
+        private System.Windows.Forms.Panel pnlParticipant;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Button btbRemove;
+        private System.Windows.Forms.Button btbAdd;
+        private System.Windows.Forms.ListView listViewNotParticipation;
+        private System.Windows.Forms.ColumnHeader NonJoinID;
+        private System.Windows.Forms.ColumnHeader NonJoinFirstName;
+        private System.Windows.Forms.ColumnHeader NonJoinLastName;
+        private System.Windows.Forms.ListView listViewParticipant;
+        private System.Windows.Forms.ColumnHeader ActivityID;
+        private System.Windows.Forms.ColumnHeader ActivityName;
+        private System.Windows.Forms.ColumnHeader StudentID;
+        private System.Windows.Forms.ColumnHeader FirstName1;
+        private System.Windows.Forms.Label Participant;
+        private System.Windows.Forms.ToolStripMenuItem participationToolStripMenuItem;
         //private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }
