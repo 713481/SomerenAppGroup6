@@ -39,6 +39,7 @@ namespace SomerenUI
             pnlDashboard.Hide();
             pnldrinkorder.Hide();
             pnlParticipant.Hide();
+            pnlSupervisorActivity.Hide();
 
         }
 
@@ -729,6 +730,23 @@ namespace SomerenUI
             {
                 MessageBox.Show("Error refreshing participant list: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        //-------------------------------------------Supervisor-------------------------------------------------
+
+        public void ShowSupervisorPanel()
+        {
+            HideAllPanel();
+            pnlSupervisorActivity.Show();
+
+
+
+
+        }
+
+
+        private void supervisorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSupervisorPanel();
         }
     }
 }

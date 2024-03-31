@@ -14,8 +14,8 @@ namespace SomerenDAL
         public List<RevenueReport> GetAllRevenueReport(DateTime startDate, DateTime endDate)
         {
             string query = "SELECT Name AS DrinkName, " +
-                 "SUM(CountOrder) AS Sales, " +
-                "SUM(CountOrder * (Price + (Price * (VAT / 100)))) AS Turnover, COUNT(DISTINCT studentID) AS NumberOfCustomers " +
+                 "SUM(o.CountOrder) AS Sales, " +
+                "SUM(o.CountOrder * (d.Price + (d.Price * (VAT / 100)))) AS Turnover, COUNT(DISTINCT studentID) AS NumberOfCustomers " +
                 "FROM [order] AS o JOIN drink AS d ON o.DrinkID = d.DrinkID " +
                 "WHERE [DateTime] BETWEEN @StartDate AND @EndDate " +
                 "GROUP BY d.Name";
