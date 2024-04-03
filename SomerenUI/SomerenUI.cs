@@ -37,7 +37,9 @@ namespace SomerenUI
             pnlRoom.Hide();
             pnlReport.Hide();
             pnlDashboard.Hide();
-
+            pnldrinkorder.Hide();
+            pnlParticipant.Hide();
+            pnlSupervisorActivity.Hide();
 
         }
 
@@ -505,6 +507,408 @@ namespace SomerenUI
             }
             List<RevenueReport> revenueReports = GetRevenueReports(startDate, endDate);
             DisplayRevenueReports(revenueReports);
+        }
+
+        //===================================================Order
+
+        private void DisplayDrinkingOrder(List<Student> students, List<Drink> drinks)
+        {
+            listViewdrinkorder.Items.Clear();
+
+            foreach (var drink in drinks)
+            {
+                ListViewItem list = new ListViewItem(drink.Id.ToString());
+                list.Tag = drink;
+                list.SubItems.Add(drink.DrinkName.ToString());
+                list.SubItems.Add(drink.Price.ToString());
+                list.SubItems.Add(drink.TypeDrink.ToString());
+                list.SubItems.Add(drink.Stock.ToString());
+                listViewdrinkorder.Items.Add(list);
+            }
+
+            listviewnamesstudent.Items.Clear();
+
+            foreach (var student in students)
+            {
+                ListViewItem list = new ListViewItem(student.Number.ToString());
+                list.Tag = student;
+                list.SubItems.Add(student.FirstName.ToString());
+                list.SubItems.Add(student.LastName.ToString());
+                listviewnamesstudent.Items.Add(list);
+            }
+        }
+
+        private void ShowDrinkOrderPanel()
+        {
+            pnlStudents.Hide();
+            pnlLecturers.Hide();
+            pnlDrinks.Hide();
+            pnlRoom.Hide();
+            pnlReport.Hide();
+            pnlDashboard.Hide();
+            pnlParticipant.Hide();
+
+            pnldrinkorder.Show();
+            try
+            {
+                // getting the students form the GetStudents method and sending it to the list and then displaying in cash register
+                List<Student> students = GetStudents();
+                List<Drink> drink = GetDrinks();
+                DisplayDrinkingOrder(students, drink);
+            }
+            catch (Exception e)
+            {
+                // show error message box if there is an error
+                MessageBox.Show("There is something wrong happen while order drink" + e.Message);
+            }
+        }
+        private List<Student> listOfstudents;
+        private List<Drink> listOfdrinks;
+        private OrderService orderService = new OrderService();
+
+        private void btncheckout_Click(object sender, EventArgs e)
+        {
+            if (listviewnamesstudent.SelectedItems == null || listviewnamesstudent.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select your student.");
+                return;
+            }
+
+            if (listViewdrinkorder.SelectedItems == null || listViewdrinkorder.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select a drink.");
+                return;
+            }
+
+            int studentID = int.Parse(listviewnamesstudent.SelectedItems[0].SubItems[0].Text);
+            int drinkID = int.Parse(listViewdrinkorder.SelectedItems[0].SubItems[0].Text);
+
+            Order order = new Order();
+            order.studentID = studentID;
+            order.drinkID = drinkID;
+
+            string input = txtTotalAmount.Text;
+            int numberOfDrink;
+            if (!int.TryParse(input, out numberOfDrink))
+            {
+                MessageBox.Show("You entered an invalid quantity.");
+                return;
+            }
+
+            Drink selectedDrink = orderService.GetDrinkById(drinkID); // You need to implement this method
+
+            if (selectedDrink == null)
+            {
+                MessageBox.Show("Unable to retrieve selected drink.");
+                return;
+            }
+
+            // Calculate the total cost using the retrieved drink's price
+            float priceTotal = selectedDrink.Price * numberOfDrink;
+
+            // Update the order with the calculated total cost
+            order.price = priceTotal;
+
+            // Call the orderService to place the order
+            orderService.OrderDrink(order, numberOfDrink, studentID);
+
+            orderService.UpdateDrinkStock(drinkID, numberOfDrink); // You need to implement this method
+
+            // Show the success message with the total cost
+            MessageBox.Show($"Order placed successfully. Total Price: {priceTotal}");
+
+            // UnselectListviewItem(listviewnamesstudent);
+            // UnselectListviewItem(listviewnamesstudent);
+        }
+
+        private int numberOfORder = 0;
+        private int KeepTrackOrderID()
+        {
+            numberOfORder++;
+            return numberOfORder;
+        }
+
+        private void drinkOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDrinkOrderPanel();
+        }
+
+
+        //=========================================================> Participation
+        private void ShowParticipationPanel()
+        {
+            pnlStudents.Hide();
+            pnlLecturers.Hide();
+            pnlDrinks.Hide();
+            pnlRoom.Hide();
+            pnlReport.Hide();
+            pnlDashboard.Hide();
+            pnldrinkorder.Hide();
+
+            pnlParticipant.Show();
+
+            try
+            {
+                List<StudentParticipation> getParticipant = GetParticipation();
+                List<StudentParticipation> notParticipation = GetNonParticipation();
+                DisplayStudentParticipant(getParticipant, notParticipation);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        public void DisplayStudentParticipant(List<StudentParticipation> participations, List<StudentParticipation> nonParticipations)
+        {
+            listViewParticipant.Items.Clear();
+            foreach (var participent in participations)
+            {
+                ListViewItem list = new ListViewItem(participent.activityID.ToString());
+                list.Tag = participent;
+                list.SubItems.Add(participent.activityName.ToString());
+                list.SubItems.Add(participent.studentID.ToString());
+                list.SubItems.Add(participent.firstName.ToString());
+                listViewParticipant.Items.Add(list);
+            }
+
+            listViewNotParticipation.Items.Clear();
+            foreach (var nonParticipation in nonParticipations)
+            {
+                ListViewItem list = new ListViewItem(nonParticipation.studentID.ToString());
+                list.Tag = nonParticipation;
+                list.SubItems.Add(nonParticipation.firstName.ToString());
+                list.SubItems.Add(nonParticipation.lastName.ToString());
+                listViewNotParticipation.Items.Add(list);
+            }
+        }
+
+        private List<StudentParticipation> GetParticipation()
+        {
+            StudentParticipationService participationService = new StudentParticipationService();
+            List<StudentParticipation> participations = participationService.GetStudentParticipations();
+            return participations;
+        }
+
+        private List<StudentParticipation> GetNonParticipation()
+        {
+            StudentParticipationService nonParticipationService = new StudentParticipationService();
+            List<StudentParticipation> participations = nonParticipationService.GetNonStudentParticipation();
+            return participations;
+        }
+
+        private void participationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowParticipationPanel();
+        }
+
+        private void btbAdd_Click(object sender, EventArgs e)
+        {
+            if (listViewNotParticipation.SelectedItems == null || listViewNotParticipation.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select your student id");
+                return;
+            }
+
+            if (listViewParticipant.SelectedItems == null || listViewParticipant.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select a activity id");
+                return;
+            }
+            int studentID = int.Parse(listViewNotParticipation.SelectedItems[0].SubItems[0].Text);
+            int activityID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[0].Text);
+
+            if (activityID != null && studentID != null)
+            {
+                StudentParticipationService participationService = new StudentParticipationService();
+                participationService.AddStudentParticipant(studentID, activityID);
+            }
+            else
+            {
+                MessageBox.Show("Please select both an activity and a student.");
+            }
+        }
+
+        private void btbRemove_Click(object sender, EventArgs e)
+        {
+            if (listViewParticipant.SelectedItems == null || listViewParticipant.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Select a participant to remove.");
+                return;
+            }
+
+            int studentID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[2].Text);
+            int activityID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[0].Text);
+
+            DialogResult result = MessageBox.Show("Are you sure you wish to remove this participant?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    StudentParticipationService participantService = new StudentParticipationService();
+                    participantService.RemoveStudentParticipant(studentID, activityID);
+
+                    // Refresh the listview to reflect the changes
+                    RefreshParticipantListView();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error removing participant: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void RefreshParticipantListView()
+        {
+            // Clear the existing items in the listview
+            listViewParticipant.Items.Clear();
+
+            try
+            {
+                // Retrieve the updated participant data from the database using your service method
+                StudentParticipationService participantService = new StudentParticipationService();
+                List<StudentParticipation> participants = participantService.GetStudentParticipations();
+
+                // Populate the listview with the updated participant data
+                foreach (var participant in participants)
+                {
+                    ListViewItem list = new ListViewItem(participant.activityID.ToString());
+                    list.Tag = participant;
+                    list.SubItems.Add(participant.activityName.ToString());
+                    list.SubItems.Add(participant.studentID.ToString());
+                    list.SubItems.Add(participant.firstName.ToString());
+                    listViewParticipant.Items.Add(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error refreshing participant list: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //-------------------------------------------Supervisor-------------------------------------------------
+
+        public void ShowSupervisorPanel()
+        {
+            HideAllPanel();
+            pnlSupervisorActivity.Show();
+
+
+            try
+            {
+                DisplaySupervisorActivities();
+                DisplayNotSupervisors();
+                DisplaySupervisors();
+
+            }
+
+            catch (Exception e)
+            {
+                // show error message box if there is an error
+                MessageBox.Show("Something went wrong while loading the supervisor page: " + e.Message);
+            }
+
+
+        }
+        private List<Supervisor> GetSupervisedActivities()
+        {
+            SupervisorService supervisorsService = new SupervisorService();
+            List<Supervisor> supervisors = supervisorsService.GetSupervisorActivities();
+            return supervisors;
+        }
+        private void DisplaySupervisorActivities()
+        {
+            // clear the listview before filling it
+            listViewActivityShow.Items.Clear();
+            List<Supervisor> activities = GetSupervisedActivities();
+
+            foreach (Supervisor activity in activities)
+            {
+                ListViewItem li = new ListViewItem(activity.activityName.ToString());
+                li.SubItems.Add($"{activity.Date:dd/MM/yyyy}");
+                li.Tag = activity;
+                
+
+                listViewActivityShow.Items.Add(li);
+            }
+        }
+
+        private ListViewItem listViewItem = null;
+        private Supervisor selectedSupervisor = null;
+        private Supervisor selectedActivity = null;
+
+        private List<Supervisor> GetSupervisors()
+        {
+            SupervisorService supervisorsService = new SupervisorService();
+            List<Supervisor> supervisors = supervisorsService.GetSupervisors(selectedActivity);
+            return supervisors;
+        }
+        private List<Supervisor> GetNotSupervisors()
+        {
+            SupervisorService supervisorsService = new SupervisorService();
+            List<Supervisor> supervisors = supervisorsService.GetNotSupervisors(selectedActivity);
+            return supervisors;
+        }
+
+        private void DisplayNotSupervisors()
+        {
+
+            listViewSupervisorNot.Items.Clear();
+
+            List<Supervisor> supervisors = GetNotSupervisors();
+
+            foreach (Supervisor supervisor in supervisors)
+            {
+                ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
+                li.SubItems.Add(supervisor.lastName.ToString());
+                li.Tag = supervisor;
+                
+
+                listViewSupervisorNot.Items.Add(li);
+            }
+        }
+        private void DisplaySupervisors()
+        {
+
+            listViewSupervisorIs.Items.Clear();
+
+            List<Supervisor> supervisors = GetSupervisors();
+
+            foreach (Supervisor supervisor in supervisors)
+            {
+                ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
+                li.SubItems.Add(supervisor.lastName.ToString());
+                li.SubItems.Add(supervisor.activityName.ToString());
+                li.Tag = supervisor;              
+                listViewSupervisorIs.Items.Add(li);
+            }
+        }
+
+
+
+        private void supervisorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSupervisorPanel();
+        }
+
+        private void btnAddSupervisor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemoveSupervisor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUpdateSupervisor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listViewSupervisorNot_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
