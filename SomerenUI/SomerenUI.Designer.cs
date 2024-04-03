@@ -51,6 +51,9 @@
             columnHeader14 = new System.Windows.Forms.ColumnHeader();
             label3 = new System.Windows.Forms.Label();
             pnlStudents = new System.Windows.Forms.Panel();
+            btnEditStudent = new System.Windows.Forms.Button();
+            btnRemoveStudent = new System.Windows.Forms.Button();
+            btnAddStudent = new System.Windows.Forms.Button();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             listViewStudents = new System.Windows.Forms.ListView();
             studentNumber = new System.Windows.Forms.ColumnHeader();
@@ -105,9 +108,7 @@
             columnHeader7 = new System.Windows.Forms.ColumnHeader();
             columnHeader8 = new System.Windows.Forms.ColumnHeader();
             lblRoom = new System.Windows.Forms.Label();
-            btnAddStudent = new System.Windows.Forms.Button();
-            btnRemoveStudent = new System.Windows.Forms.Button();
-            btnEditStudent = new System.Windows.Forms.Button();
+            roomId = new System.Windows.Forms.ColumnHeader();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlRoom.SuspendLayout();
@@ -289,6 +290,36 @@
             pnlStudents.Size = new System.Drawing.Size(943, 469);
             pnlStudents.TabIndex = 2;
             // 
+            // btnEditStudent
+            // 
+            btnEditStudent.Location = new System.Drawing.Point(441, 355);
+            btnEditStudent.Name = "btnEditStudent";
+            btnEditStudent.Size = new System.Drawing.Size(208, 82);
+            btnEditStudent.TabIndex = 5;
+            btnEditStudent.Text = "Edit Student";
+            btnEditStudent.UseVisualStyleBackColor = true;
+            btnEditStudent.Click += btnEditStudent_Click;
+            // 
+            // btnRemoveStudent
+            // 
+            btnRemoveStudent.Location = new System.Drawing.Point(227, 355);
+            btnRemoveStudent.Name = "btnRemoveStudent";
+            btnRemoveStudent.Size = new System.Drawing.Size(208, 82);
+            btnRemoveStudent.TabIndex = 4;
+            btnRemoveStudent.Text = "Remove student";
+            btnRemoveStudent.UseVisualStyleBackColor = true;
+            btnRemoveStudent.Click += btnRemoveStudent_Click;
+            // 
+            // btnAddStudent
+            // 
+            btnAddStudent.Location = new System.Drawing.Point(13, 355);
+            btnAddStudent.Name = "btnAddStudent";
+            btnAddStudent.Size = new System.Drawing.Size(208, 82);
+            btnAddStudent.TabIndex = 3;
+            btnAddStudent.Text = "Add student";
+            btnAddStudent.UseVisualStyleBackColor = true;
+            btnAddStudent.Click += btnAddStudent_Click;
+            // 
             // pictureBox1
             // 
             pictureBox1.Image = (System.Drawing.Image)resources.GetObject("pictureBox1.Image");
@@ -300,7 +331,8 @@
             // 
             // listViewStudents
             // 
-            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentNumber, firstName, lastName, phoneNumber, age, classroom });
+            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentNumber, firstName, lastName, phoneNumber, age, classroom, roomId });
+            listViewStudents.FullRowSelect = true;
             listViewStudents.Location = new System.Drawing.Point(13, 42);
             listViewStudents.Name = "listViewStudents";
             listViewStudents.Size = new System.Drawing.Size(766, 307);
@@ -581,6 +613,7 @@
             // listViewDrinks
             // 
             listViewDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { DrinkId, DrinkName, TypeDrink, Price, VAT, Stock, Sold, StockWarning });
+            listViewDrinks.FullRowSelect = true;
             listViewDrinks.Location = new System.Drawing.Point(13, 42);
             listViewDrinks.Name = "listViewDrinks";
             listViewDrinks.Size = new System.Drawing.Size(766, 307);
@@ -694,33 +727,10 @@
             lblRoom.TabIndex = 0;
             lblRoom.Text = "Room";
             // 
-            // btnAddStudent
+            // roomId
             // 
-            btnAddStudent.Location = new System.Drawing.Point(13, 355);
-            btnAddStudent.Name = "btnAddStudent";
-            btnAddStudent.Size = new System.Drawing.Size(208, 82);
-            btnAddStudent.TabIndex = 3;
-            btnAddStudent.Text = "Add student";
-            btnAddStudent.UseVisualStyleBackColor = true;
-            btnAddStudent.Click += btnAddStudent_Click;
-            // 
-            // btnRemoveStudent
-            // 
-            btnRemoveStudent.Location = new System.Drawing.Point(227, 355);
-            btnRemoveStudent.Name = "btnRemoveStudent";
-            btnRemoveStudent.Size = new System.Drawing.Size(208, 82);
-            btnRemoveStudent.TabIndex = 4;
-            btnRemoveStudent.Text = "Remove student";
-            btnRemoveStudent.UseVisualStyleBackColor = true;
-            // 
-            // btnEditStudent
-            // 
-            btnEditStudent.Location = new System.Drawing.Point(441, 355);
-            btnEditStudent.Name = "btnEditStudent";
-            btnEditStudent.Size = new System.Drawing.Size(208, 82);
-            btnEditStudent.TabIndex = 5;
-            btnEditStudent.Text = "Edit Student";
-            btnEditStudent.UseVisualStyleBackColor = true;
+            roomId.Text = "Room ID";
+            roomId.Width = 100;
             // 
             // SomerenUI
             // 
@@ -843,6 +853,7 @@
         private System.Windows.Forms.Button btnEditStudent;
         private System.Windows.Forms.Button btnRemoveStudent;
         private System.Windows.Forms.Button btnAddStudent;
+        private System.Windows.Forms.ColumnHeader roomId;
         //private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }
