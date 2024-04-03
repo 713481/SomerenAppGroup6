@@ -126,6 +126,7 @@
             columnHeader7 = new System.Windows.Forms.ColumnHeader();
             columnHeader8 = new System.Windows.Forms.ColumnHeader();
             lblRoom = new System.Windows.Forms.Label();
+            roomId = new System.Windows.Forms.ColumnHeader();
             pnlParticipant = new System.Windows.Forms.Panel();
             pictureBox7 = new System.Windows.Forms.PictureBox();
             btbRemove = new System.Windows.Forms.Button();
@@ -374,30 +375,29 @@
             // 
             // btnEditStudent
             // 
-            btnEditStudent.Location = new System.Drawing.Point(504, 473);
-            btnEditStudent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnEditStudent.Location = new System.Drawing.Point(441, 355);
             btnEditStudent.Name = "btnEditStudent";
-            btnEditStudent.Size = new System.Drawing.Size(238, 109);
+            btnEditStudent.Size = new System.Drawing.Size(208, 82);
             btnEditStudent.TabIndex = 5;
             btnEditStudent.Text = "Edit Student";
             btnEditStudent.UseVisualStyleBackColor = true;
+            btnEditStudent.Click += btnEditStudent_Click;
             // 
             // btnRemoveStudent
             // 
-            btnRemoveStudent.Location = new System.Drawing.Point(259, 473);
-            btnRemoveStudent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnRemoveStudent.Location = new System.Drawing.Point(227, 355);
             btnRemoveStudent.Name = "btnRemoveStudent";
-            btnRemoveStudent.Size = new System.Drawing.Size(238, 109);
+            btnRemoveStudent.Size = new System.Drawing.Size(208, 82);
             btnRemoveStudent.TabIndex = 4;
             btnRemoveStudent.Text = "Remove student";
             btnRemoveStudent.UseVisualStyleBackColor = true;
+            btnRemoveStudent.Click += btnRemoveStudent_Click;
             // 
             // btnAddStudent
             // 
-            btnAddStudent.Location = new System.Drawing.Point(15, 473);
-            btnAddStudent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            btnAddStudent.Location = new System.Drawing.Point(13, 355);
             btnAddStudent.Name = "btnAddStudent";
-            btnAddStudent.Size = new System.Drawing.Size(238, 109);
+            btnAddStudent.Size = new System.Drawing.Size(208, 82);
             btnAddStudent.TabIndex = 3;
             btnAddStudent.Text = "Add student";
             btnAddStudent.UseVisualStyleBackColor = true;
@@ -415,9 +415,9 @@
             // 
             // listViewStudents
             // 
-            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentNumber, firstName, lastName, phoneNumber, age, classroom });
-            listViewStudents.Location = new System.Drawing.Point(15, 56);
-            listViewStudents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentNumber, firstName, lastName, phoneNumber, age, classroom, roomId });
+            listViewStudents.FullRowSelect = true;
+            listViewStudents.Location = new System.Drawing.Point(13, 42);
             listViewStudents.Name = "listViewStudents";
             listViewStudents.Size = new System.Drawing.Size(875, 408);
             listViewStudents.TabIndex = 1;
@@ -829,8 +829,8 @@
             // listViewDrinks
             // 
             listViewDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { DrinkId, DrinkName, TypeDrink, Price, VAT, Stock, Sold, StockWarning });
-            listViewDrinks.Location = new System.Drawing.Point(15, 56);
-            listViewDrinks.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            listViewDrinks.FullRowSelect = true;
+            listViewDrinks.Location = new System.Drawing.Point(13, 42);
             listViewDrinks.Name = "listViewDrinks";
             listViewDrinks.Size = new System.Drawing.Size(875, 408);
             listViewDrinks.TabIndex = 1;
@@ -943,6 +943,10 @@
             lblRoom.TabIndex = 0;
             lblRoom.Text = "Room";
             // 
+            // roomId
+            // 
+            roomId.Text = "Room ID";
+            roomId.Width = 100;
             // pnlParticipant
             // 
             pnlParticipant.Controls.Add(pictureBox7);
@@ -1351,6 +1355,7 @@
         private System.Windows.Forms.Button btnEditStudent;
         private System.Windows.Forms.Button btnRemoveStudent;
         private System.Windows.Forms.Button btnAddStudent;
+        private System.Windows.Forms.ColumnHeader roomId;
         private System.Windows.Forms.ToolStripMenuItem drinkOrderToolStripMenuItem;
         private System.Windows.Forms.Panel pnldrinkorder;
         private System.Windows.Forms.Button btncheckout;
