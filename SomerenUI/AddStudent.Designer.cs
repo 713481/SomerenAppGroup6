@@ -41,13 +41,11 @@
             lblStudentRoomId = new System.Windows.Forms.Label();
             tbxStudentRoomId = new System.Windows.Forms.TextBox();
             btnStudentAddStudent = new System.Windows.Forms.Button();
-            lblStudentID = new System.Windows.Forms.Label();
-            tbxStudentID = new System.Windows.Forms.TextBox();
             SuspendLayout();
             // 
             // tbxStudentFirstName
             // 
-            tbxStudentFirstName.Location = new System.Drawing.Point(138, 75);
+            tbxStudentFirstName.Location = new System.Drawing.Point(139, 48);
             tbxStudentFirstName.Name = "tbxStudentFirstName";
             tbxStudentFirstName.Size = new System.Drawing.Size(209, 23);
             tbxStudentFirstName.TabIndex = 0;
@@ -55,7 +53,7 @@
             // lblStudentFirstName
             // 
             lblStudentFirstName.AutoSize = true;
-            lblStudentFirstName.Location = new System.Drawing.Point(68, 78);
+            lblStudentFirstName.Location = new System.Drawing.Point(69, 51);
             lblStudentFirstName.Name = "lblStudentFirstName";
             lblStudentFirstName.Size = new System.Drawing.Size(64, 15);
             lblStudentFirstName.TabIndex = 1;
@@ -64,7 +62,7 @@
             // lblStudentLastName
             // 
             lblStudentLastName.AutoSize = true;
-            lblStudentLastName.Location = new System.Drawing.Point(68, 107);
+            lblStudentLastName.Location = new System.Drawing.Point(69, 80);
             lblStudentLastName.Name = "lblStudentLastName";
             lblStudentLastName.Size = new System.Drawing.Size(63, 15);
             lblStudentLastName.TabIndex = 3;
@@ -72,7 +70,7 @@
             // 
             // tbxStudentLastName
             // 
-            tbxStudentLastName.Location = new System.Drawing.Point(138, 104);
+            tbxStudentLastName.Location = new System.Drawing.Point(139, 77);
             tbxStudentLastName.Name = "tbxStudentLastName";
             tbxStudentLastName.Size = new System.Drawing.Size(209, 23);
             tbxStudentLastName.TabIndex = 2;
@@ -80,7 +78,7 @@
             // lblStudentPhoneNumber
             // 
             lblStudentPhoneNumber.AutoSize = true;
-            lblStudentPhoneNumber.Location = new System.Drawing.Point(45, 136);
+            lblStudentPhoneNumber.Location = new System.Drawing.Point(46, 109);
             lblStudentPhoneNumber.Name = "lblStudentPhoneNumber";
             lblStudentPhoneNumber.Size = new System.Drawing.Size(86, 15);
             lblStudentPhoneNumber.TabIndex = 5;
@@ -88,7 +86,7 @@
             // 
             // tbxStudentPhoneNumber
             // 
-            tbxStudentPhoneNumber.Location = new System.Drawing.Point(138, 133);
+            tbxStudentPhoneNumber.Location = new System.Drawing.Point(139, 106);
             tbxStudentPhoneNumber.Name = "tbxStudentPhoneNumber";
             tbxStudentPhoneNumber.Size = new System.Drawing.Size(209, 23);
             tbxStudentPhoneNumber.TabIndex = 4;
@@ -96,7 +94,7 @@
             // lblStudentAge
             // 
             lblStudentAge.AutoSize = true;
-            lblStudentAge.Location = new System.Drawing.Point(103, 165);
+            lblStudentAge.Location = new System.Drawing.Point(104, 138);
             lblStudentAge.Name = "lblStudentAge";
             lblStudentAge.Size = new System.Drawing.Size(28, 15);
             lblStudentAge.TabIndex = 7;
@@ -105,7 +103,7 @@
             // 
             // tbxStudentAge
             // 
-            tbxStudentAge.Location = new System.Drawing.Point(138, 162);
+            tbxStudentAge.Location = new System.Drawing.Point(139, 135);
             tbxStudentAge.Name = "tbxStudentAge";
             tbxStudentAge.Size = new System.Drawing.Size(209, 23);
             tbxStudentAge.TabIndex = 6;
@@ -113,7 +111,7 @@
             // lblStudentClass
             // 
             lblStudentClass.AutoSize = true;
-            lblStudentClass.Location = new System.Drawing.Point(103, 194);
+            lblStudentClass.Location = new System.Drawing.Point(104, 167);
             lblStudentClass.Name = "lblStudentClass";
             lblStudentClass.Size = new System.Drawing.Size(34, 15);
             lblStudentClass.TabIndex = 9;
@@ -121,7 +119,7 @@
             // 
             // tbxStudentClass
             // 
-            tbxStudentClass.Location = new System.Drawing.Point(138, 191);
+            tbxStudentClass.Location = new System.Drawing.Point(139, 164);
             tbxStudentClass.Name = "tbxStudentClass";
             tbxStudentClass.Size = new System.Drawing.Size(209, 23);
             tbxStudentClass.TabIndex = 8;
@@ -129,7 +127,7 @@
             // lblStudentRoomId
             // 
             lblStudentRoomId.AutoSize = true;
-            lblStudentRoomId.Location = new System.Drawing.Point(79, 223);
+            lblStudentRoomId.Location = new System.Drawing.Point(80, 196);
             lblStudentRoomId.Name = "lblStudentRoomId";
             lblStudentRoomId.Size = new System.Drawing.Size(53, 15);
             lblStudentRoomId.TabIndex = 11;
@@ -138,14 +136,14 @@
             // 
             // tbxStudentRoomId
             // 
-            tbxStudentRoomId.Location = new System.Drawing.Point(138, 220);
+            tbxStudentRoomId.Location = new System.Drawing.Point(139, 193);
             tbxStudentRoomId.Name = "tbxStudentRoomId";
             tbxStudentRoomId.Size = new System.Drawing.Size(209, 23);
             tbxStudentRoomId.TabIndex = 10;
             // 
             // btnStudentAddStudent
             // 
-            btnStudentAddStudent.Location = new System.Drawing.Point(103, 275);
+            btnStudentAddStudent.Location = new System.Drawing.Point(104, 248);
             btnStudentAddStudent.Name = "btnStudentAddStudent";
             btnStudentAddStudent.Size = new System.Drawing.Size(192, 53);
             btnStudentAddStudent.TabIndex = 12;
@@ -153,29 +151,11 @@
             btnStudentAddStudent.UseVisualStyleBackColor = true;
             btnStudentAddStudent.Click += btnStudentAddStudent_Click;
             // 
-            // lblStudentID
-            // 
-            lblStudentID.AutoSize = true;
-            lblStudentID.Location = new System.Drawing.Point(68, 49);
-            lblStudentID.Name = "lblStudentID";
-            lblStudentID.Size = new System.Drawing.Size(62, 15);
-            lblStudentID.TabIndex = 14;
-            lblStudentID.Text = "Student ID";
-            // 
-            // tbxStudentID
-            // 
-            tbxStudentID.Location = new System.Drawing.Point(138, 46);
-            tbxStudentID.Name = "tbxStudentID";
-            tbxStudentID.Size = new System.Drawing.Size(209, 23);
-            tbxStudentID.TabIndex = 13;
-            // 
             // AddStudent
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(418, 361);
-            Controls.Add(lblStudentID);
-            Controls.Add(tbxStudentID);
+            ClientSize = new System.Drawing.Size(418, 345);
             Controls.Add(btnStudentAddStudent);
             Controls.Add(lblStudentRoomId);
             Controls.Add(tbxStudentRoomId);
@@ -210,7 +190,5 @@
         private System.Windows.Forms.Label lblStudentRoomId;
         private System.Windows.Forms.TextBox tbxStudentRoomId;
         private System.Windows.Forms.Button btnStudentAddStudent;
-        private System.Windows.Forms.Label lblStudentID;
-        private System.Windows.Forms.TextBox tbxStudentID;
     }
 }

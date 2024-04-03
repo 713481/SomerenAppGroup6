@@ -18,7 +18,6 @@ namespace SomerenUI
         public AddStudent()
         {
             InitializeComponent();
-            studentDao = new StudentDao(); // Initialize studentDao
         }
 
         private void btnAddStudent_Click(object sender, EventArgs e)
@@ -42,7 +41,6 @@ namespace SomerenUI
                 // Create a new Student object with the form data
                 Student student = new Student
                 {
-                    Id = int.Parse(tbxStudentID.Text),
                     FirstName = tbxStudentFirstName.Text,
                     LastName = tbxStudentLastName.Text,
                     PhoneNumber = int.Parse(tbxStudentPhoneNumber.Text),
@@ -51,7 +49,7 @@ namespace SomerenUI
                     Room = int.Parse(tbxStudentRoomId.Text),
                 };
 
-                // Call the Student method from StudentDao to add the new student
+                // Call the InsertDrink method from DrinkDao to add the new drink
                 studentDao.InsertStudent(student);
 
                 // Display a success message to the user
@@ -60,7 +58,7 @@ namespace SomerenUI
                 DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
-            {
+            {   
                 Console.WriteLine($"Something went wrong while adding the student: {ex}");
             }
             Close();

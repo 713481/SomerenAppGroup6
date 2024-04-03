@@ -209,11 +209,7 @@ namespace SomerenUI
             li.SubItems.Add(student.PhoneNumber.ToString());
             li.SubItems.Add(student.Age.ToString());
             li.SubItems.Add(student.Class.ToString());
-            li.SubItems.Add(student.Room.ToString());
-
-            // Set Tag property to student object
-            li.Tag = student;
-
+            li.Tag = student;   // link student object to listview item
             return li;
         }
 
@@ -290,40 +286,6 @@ namespace SomerenUI
                 MessageBox.Show($"Error deleting drink: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnRemoveStudent_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Check if a student is selected in the ListView
-                if (listViewStudents.SelectedItems.Count > 0)
-                {
-                    // Get the selected student from the ListView
-                    Student selectedStudent = (Student)listViewStudents.SelectedItems[0].Tag;
-
-                    // Display a confirmation message box
-                    DialogResult result = MessageBox.Show($"Are you sure you want to delete {selectedStudent.FirstName} {selectedStudent.LastName}?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    // If the user confirms the deletion, proceed with deleting the student
-                    if (result == DialogResult.Yes)
-                    {
-                        // Call the DAO method to delete the student
-                        StudentDao studentDao = new StudentDao();
-                        studentDao.DeleteStudent(selectedStudent.Id);
-
-                        // Refresh the students list
-                        RefreshStudents();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please select a student to remove.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error deleting student: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void btnEditDrink_Click(object sender, EventArgs e)
         {
@@ -334,22 +296,6 @@ namespace SomerenUI
 
                 // Open a new form or dialog to edit the drink details
                 EditDrink editForm = new EditDrink(selectedDrink, this); // Pass SomerenUI instance as parameter
-                editForm.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Please select a drink to edit.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void btnEditStudent_Click(object sender, EventArgs e)
-        {
-            if (listViewStudents.SelectedItems.Count > 0)
-            {
-                // Get the selected student from the ListView
-                Student selectedStudent = (Student)listViewStudents.SelectedItems[0].Tag;
-
-                // Open a new form or dialog to edit the student details
-                EditStudent editForm = new EditStudent(selectedStudent, this); // Pass SomerenUI instance as parameter
                 editForm.ShowDialog();
             }
             else
