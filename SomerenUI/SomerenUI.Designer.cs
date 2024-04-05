@@ -1115,7 +1115,7 @@
             listViewSupervisorIs.FullRowSelect = true;
             listViewSupervisorIs.Location = new System.Drawing.Point(577, 121);
             listViewSupervisorIs.Name = "listViewSupervisorIs";
-            listViewSupervisorIs.Size = new System.Drawing.Size(339, 240);
+            listViewSupervisorIs.Size = new System.Drawing.Size(352, 240);
             listViewSupervisorIs.TabIndex = 25;
             listViewSupervisorIs.UseCompatibleStateImageBehavior = false;
             listViewSupervisorIs.View = System.Windows.Forms.View.Details;
@@ -1134,7 +1134,7 @@
             // ActivitySupervise
             // 
             ActivitySupervise.Text = "Activity Name";
-            ActivitySupervise.Width = 130;
+            ActivitySupervise.Width = 150;
             // 
             // pictureBoxxxx
             // 
@@ -1387,7 +1387,6 @@
         private System.Windows.Forms.Button btnRemoveSupervisor;
         private System.Windows.Forms.Button btnAddSupervisor;
         private System.Windows.Forms.ListView listViewSupervisorNot;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader supervisorFirstName;
         private System.Windows.Forms.ColumnHeader SupervisorLastName;
         private System.Windows.Forms.ListView listViewActivityShow;

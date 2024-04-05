@@ -778,26 +778,23 @@ namespace SomerenUI
             }
         }
 
-        private ListViewItem listViewItem = null;
-        private Supervisor selectedSupervisor = null;
-        private Supervisor selectedActivity = null;
-
+        
         private List<Supervisor> GetSupervisors()
         {
             SupervisorService supervisorsService = new SupervisorService();
-            List<Supervisor> supervisors = supervisorsService.GetSupervisors(selectedActivity);
+            List<Supervisor> supervisors = supervisorsService.GetSupervisors();
             return supervisors;
         }
         private List<Supervisor> GetNotSupervisors()
         {
             SupervisorService supervisorsService = new SupervisorService();
-            List<Supervisor> supervisors = supervisorsService.GetNotSupervisors(selectedActivity);
+            List<Supervisor> supervisors = supervisorsService.GetNotSupervisors();
             return supervisors;
         }
 
         private void DisplayNotSupervisors()
         {
-
+            // clear the listview before filling it
             listViewSupervisorNot.Items.Clear();
 
             List<Supervisor> supervisors = GetNotSupervisors();
@@ -814,7 +811,7 @@ namespace SomerenUI
         }
         private void DisplaySupervisors()
         {
-
+            // clear the listview before filling it
             listViewSupervisorIs.Items.Clear();
 
             List<Supervisor> supervisors = GetSupervisors();
@@ -823,7 +820,9 @@ namespace SomerenUI
             {
                 ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
                 li.SubItems.Add(supervisor.lastName.ToString());
-                li.SubItems.Add(supervisor.activityName.ToString());
+               
+                    li.SubItems.Add(supervisor.activityName.ToString());
+              
                 li.Tag = supervisor;              
                 listViewSupervisorIs.Items.Add(li);
             }
@@ -838,17 +837,44 @@ namespace SomerenUI
 
         private void btnAddSupervisor_Click(object sender, EventArgs e)
         {
+            // select activity and lecturer from the list views
+            if (listViewActivityShow.SelectedItems.Count == 0 || listViewSupervisorNot.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("please select both an activity and a lecturer.");
+                return;
+            }
+
+        
 
         }
 
         private void btnRemoveSupervisor_Click(object sender, EventArgs e)
         {
+            // Check if select
+            if (listViewSupervisorIs.SelectedItems.Count != 1)
+            {
+                MessageBox.Show("Please select one association between an activity and a lecturer.");
+                return;
+            }
 
+            // Get the selected 
+            Supervisor selectedAssociation = (Supervisor)listViewSupervisorIs.SelectedItems[0].Tag;
+
+            // Delete
+            SupervisorService supervisorService = new SupervisorService();
+            supervisorService.RemoveSupervisor(selectedAssociation.ActivityID, selectedAssociation.LecturerId);
+
+            // Refresh the ListView
+            DisplaySupervisorActivities();
+            DisplayNotSupervisors();
+            DisplaySupervisors();
         }
 
         private void btnUpdateSupervisor_Click(object sender, EventArgs e)
         {
-
+            DisplaySupervisorActivities();
+            DisplayNotSupervisors();
+            DisplaySupervisors();
         }
 
         private void listViewSupervisorNot_SelectedIndexChanged(object sender, EventArgs e)
