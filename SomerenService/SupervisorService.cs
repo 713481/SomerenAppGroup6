@@ -16,14 +16,14 @@ namespace SomerenService
         {
             supervisordb = new SupervisorDao();
         }
-        public List<Supervisor> GetNotSupervisors(Supervisor activity)
+        public List<Supervisor> GetNotSupervisors()
         {
-            List<Supervisor> supervisors = supervisordb.GetNotSupervisor(activity);
+            List<Supervisor> supervisors = supervisordb.GetNotSupervisor();
             return supervisors;
         }
-        public List<Supervisor> GetSupervisors(Supervisor activity)
+        public List<Supervisor> GetSupervisors()
         {
-            List<Supervisor> supervisors = supervisordb.GetSupervisor(activity);
+            List<Supervisor> supervisors = supervisordb.GetSupervisor();
             return supervisors;
         }
 
@@ -32,13 +32,15 @@ namespace SomerenService
             List<Supervisor> activities = supervisordb.GetSupervisorActivities();
             return activities;
         }
-        public void AddSupervisors(Supervisor activity)
+
+        //public void AddSupervisor(int activityID, int lecturerID)
+        //{
+        //    supervisordb.AddSupervisor(activityID, lecturerID);
+        //}
+        public void RemoveSupervisor(int activityID, int lecturerID)
         {
-            supervisordb.AddSupervisor(activity);
+            supervisordb.RemoveSupervisor(activityID, lecturerID);
         }
-        public void RemoveSupervisors(Supervisor activity)
-        {
-            supervisordb.RemoveSupervisor(activity);
-        }
+
     }
 }
