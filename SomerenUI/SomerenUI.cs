@@ -40,7 +40,6 @@ namespace SomerenUI
             pnldrinkorder.Hide();
             pnlParticipant.Hide();
             pnlSupervisorActivity.Hide();
-
         }
 
         // show the drink panel
@@ -486,13 +485,7 @@ namespace SomerenUI
 
         private void ShowDrinkOrderPanel()
         {
-            pnlStudents.Hide();
-            pnlLecturers.Hide();
-            pnlDrinks.Hide();
-            pnlRoom.Hide();
-            pnlReport.Hide();
-            pnlDashboard.Hide();
-            pnlParticipant.Hide();
+            HideAllPanel();
 
             pnldrinkorder.Show();
             try
@@ -583,13 +576,7 @@ namespace SomerenUI
         //=========================================================> Participation
         private void ShowParticipationPanel()
         {
-            pnlStudents.Hide();
-            pnlLecturers.Hide();
-            pnlDrinks.Hide();
-            pnlRoom.Hide();
-            pnlReport.Hide();
-            pnlDashboard.Hide();
-            pnldrinkorder.Hide();
+            HideAllPanel();
 
             pnlParticipant.Show();
 
