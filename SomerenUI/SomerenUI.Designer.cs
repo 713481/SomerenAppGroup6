@@ -35,7 +35,6 @@
             exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             studentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             lecturersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            activitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             roomsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             drinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             revenueReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,7 +182,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem, drinksToolStripMenuItem, revenueReportToolStripMenuItem, drinkOrderToolStripMenuItem, participationToolStripMenuItem, supervisorToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, roomsToolStripMenuItem, drinksToolStripMenuItem, revenueReportToolStripMenuItem, drinkOrderToolStripMenuItem, participationToolStripMenuItem, supervisorToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new System.Drawing.Size(1016, 24);
@@ -224,12 +223,6 @@
             lecturersToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             lecturersToolStripMenuItem.Text = "Lecturers";
             lecturersToolStripMenuItem.Click += lecturersToolStripMenuItem_Click;
-            // 
-            // activitiesToolStripMenuItem
-            // 
-            activitiesToolStripMenuItem.Name = "activitiesToolStripMenuItem";
-            activitiesToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            activitiesToolStripMenuItem.Text = "Activities";
             // 
             // roomsToolStripMenuItem
             // 
@@ -1283,7 +1276,6 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem studentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lecturersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem activitiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roomsToolStripMenuItem;
         private System.Windows.Forms.Panel pnlDashboard;
         private System.Windows.Forms.Label lblDashboard;

@@ -250,9 +250,13 @@ namespace SomerenUI
             {
                 ListViewItem lvItem = CreateListViewItem(drink);
                 listViewDrinks.Items.Add(lvItem);
-                if (drink.Stock < 10)
+                if (drink.Stock < 10 && drink.Stock > 0)
                 {
                     lvItem.SubItems.Add($"Stock nearly depleted");
+                }
+                else if (drink.Stock <= 0)
+                {
+                    lvItem.SubItems.Add($"Stock depleted");
                 }
                 else
                 {
