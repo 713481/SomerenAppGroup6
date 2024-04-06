@@ -109,7 +109,7 @@ namespace SomerenUI
             li.Tag = lecturer;   // link lecturer object to listview item
             return li;
         }
-
+        //----------------------------------Student--------------------------------------
         // Show the student panel
         private void ShowStudentsPanel()
         {
@@ -131,15 +131,109 @@ namespace SomerenUI
                 MessageBox.Show("Something went wrong while loading the students: " + e.Message);
             }
         }
-        private void btnAddStudent_Click(object sender, EventArgs e)
+        private List<Student> GetStudents()
         {
-            AddStudent form = new AddStudent();
-            if (form.ShowDialog() == DialogResult.OK) // Show AddDrink form as dialog
+            StudentService studentService = new StudentService();
+            List<Student> students = studentService.GetStudents();
+            return students;
+        }
+
+        private void DisplayStudents(List<Student> students)
+        {
+            listViewStudents.Items.Clear();
+
+            foreach (Student student in students)
             {
-                RefreshStudents(); // Refresh the ListView after the AddDrink form is closed
+                ListViewItem lvItem = CreateListViewItem(student);
+                listViewStudents.Items.Add(lvItem);
             }
         }
 
+        private ListViewItem CreateListViewItem(Student student)
+        {
+            // Creates new listviewitem and add the data to the columns
+            ListViewItem li = new ListViewItem(student.Number.ToString());
+            li.SubItems.Add(student.FirstName);
+            li.SubItems.Add(student.LastName);
+            li.SubItems.Add(student.PhoneNumber.ToString());
+            li.SubItems.Add(student.Age.ToString());
+            li.SubItems.Add(student.Class.ToString());
+            li.SubItems.Add(student.Room.ToString());
+            li.Tag = student;   // link student object to listview item
+            return li;
+        }
+        private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+            AddStudent form = new AddStudent();
+            if (form.ShowDialog() == DialogResult.OK) // Show AddStudent form as dialog
+            {
+                RefreshStudents(); // Refresh the ListView after the AddStudent form is closed
+            }
+        }
+        private void btnRemoveStudent_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Check if a student is selected in the ListView
+                if (listViewStudents.SelectedItems.Count > 0)
+                {
+                    // Get the selected student from the ListView
+                    Student selectedStudent = (Student)listViewStudents.SelectedItems[0].Tag;
+
+                    // Display a confirmation message box
+                    DialogResult result = MessageBox.Show($"Are you sure you want to delete {selectedStudent.FirstName} {selectedStudent.LastName}?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    // If the user confirms the deletion, proceed with deleting the student
+                    if (result == DialogResult.Yes)
+                    {
+                        // Call the DAO method to delete the student
+                        StudentDao studentDao = new StudentDao();
+                        studentDao.DeleteStudent(selectedStudent.Number);
+
+                        // Refresh the students list
+                        RefreshStudents();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a student to remove.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting student: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEditStudent_Click(object sender, EventArgs e)
+        {
+            if (listViewStudents.SelectedItems.Count > 0)
+            {
+                // Get the selected student from the ListView
+                Student selectedStudent = (Student)listViewStudents.SelectedItems[0].Tag;
+
+                // Open a new form or dialog to edit the student details
+                EditStudent editForm = new EditStudent(selectedStudent, this); // Pass SomerenUI instance as parameter
+                editForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a student to edit.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public void RefreshStudents()
+        {
+            try
+            {
+                List<Student> students = GetStudents();
+                DisplayStudents(students);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
+            }
+        }
+        //----------------------------------Drink--------------------------------------
         //Grabs the drinks from DB
         private List<Drink> GetDrinks()
         {
@@ -180,68 +274,6 @@ namespace SomerenUI
             li.Tag = drink;
             return li;
         }
-
-        private List<Student> GetStudents()
-        {
-            StudentService studentService = new StudentService();
-            List<Student> students = studentService.GetStudents();
-            return students;
-        }
-
-        private void DisplayStudents(List<Student> students)
-        {
-            listViewStudents.Items.Clear();
-
-            foreach (Student student in students)
-            {
-                ListViewItem lvItem = CreateListViewItem(student);
-                listViewStudents.Items.Add(lvItem);
-            }
-        }
-
-        private ListViewItem CreateListViewItem(Student student)
-        {
-            // Creates new listviewitem and add the data to the columns
-            ListViewItem li = new ListViewItem(student.Number.ToString());
-            li.SubItems.Add(student.FirstName);
-            li.SubItems.Add(student.LastName);
-            li.SubItems.Add(student.PhoneNumber.ToString());
-            li.SubItems.Add(student.Age.ToString());
-            li.SubItems.Add(student.Class.ToString());
-            li.Tag = student;   // link student object to listview item
-            return li;
-        }
-
-        private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
-        {
-            ShowDashboardPanel();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowStudentsPanel();
-        }
-
-        private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowLecturersPanel();
-        }
-
-        private void pnlLecturers_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void drinksToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowDrinksPanel();
-        }
-
         private void btnAddDrink_Click(object sender, EventArgs e)
         {
             AddDrink form = new AddDrink();
@@ -315,19 +347,7 @@ namespace SomerenUI
                 MessageBox.Show("Something went wrong while loading the drinks: " + e.Message);
             }
         }
-        public void RefreshStudents()
-        {
-            try
-            {
-                List<Student> students = GetStudents();
-                DisplayStudents(students);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
-            }
-        }
-
+        //----------------------------------Room--------------------------------------
         private void ShowRoomPanel()
         {
             //hide other panel
@@ -760,13 +780,13 @@ namespace SomerenUI
                 ListViewItem li = new ListViewItem(activity.activityName.ToString());
                 li.SubItems.Add($"{activity.Date:dd/MM/yyyy}");
                 li.Tag = activity;
-                
+
 
                 listViewActivityShow.Items.Add(li);
             }
         }
 
-        
+
         private List<Supervisor> GetSupervisors()
         {
             SupervisorService supervisorsService = new SupervisorService();
@@ -792,7 +812,7 @@ namespace SomerenUI
                 ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
                 li.SubItems.Add(supervisor.lastName.ToString());
                 li.Tag = supervisor;
-                
+
 
                 listViewSupervisorNot.Items.Add(li);
             }
@@ -808,10 +828,10 @@ namespace SomerenUI
             {
                 ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
                 li.SubItems.Add(supervisor.lastName.ToString());
-               
-                    li.SubItems.Add(supervisor.activityName.ToString());
-              
-                li.Tag = supervisor;              
+
+                li.SubItems.Add(supervisor.activityName.ToString());
+
+                li.Tag = supervisor;
                 listViewSupervisorIs.Items.Add(li);
             }
         }
@@ -832,7 +852,7 @@ namespace SomerenUI
                 return;
             }
 
-        
+
 
         }
 
@@ -868,6 +888,36 @@ namespace SomerenUI
         private void listViewSupervisorNot_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
+        {
+            ShowDashboardPanel();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowStudentsPanel();
+        }
+
+        private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowLecturersPanel();
+        }
+
+        private void pnlLecturers_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void drinksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDrinksPanel();
         }
     }
 }
