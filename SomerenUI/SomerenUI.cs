@@ -680,6 +680,7 @@ namespace SomerenUI
             {
                 StudentParticipationService participationService = new StudentParticipationService();
                 participationService.AddStudentParticipant(studentID, activityID);
+                ShowParticipationPanel();
             }
             else
             {
@@ -708,6 +709,7 @@ namespace SomerenUI
 
                     // Refresh the listview to reflect the changes
                     RefreshParticipantListView();
+                    ShowParticipationPanel();
                 }
                 catch (Exception ex)
                 {
@@ -742,6 +744,53 @@ namespace SomerenUI
             {
                 MessageBox.Show("Error refreshing participant list: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void DisplayParticipation(int activityID)
+        {
+            try
+            {
+                List<StudentParticipation> participation = GetStudentParticipations(activityID);
+                listViewOfParticipationSelect.Items.Clear();
+                foreach (var studentParticipation in participation)
+                {
+                    ListViewItem list = new ListViewItem(studentParticipation.participationID.ToString());
+                    list.Tag = studentParticipation;
+                    list.SubItems.Add(studentParticipation.studentID.ToString());
+                    list.SubItems.Add(studentParticipation.firstName.ToString());
+                    list.SubItems.Add(studentParticipation.lastName.ToString());
+                    list.SubItems.Add(studentParticipation.activityName.ToString());
+                    listViewOfParticipationSelect.Items.Add(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error displaying participation: " + ex.Message);
+            }
+        }
+
+        private List<StudentParticipation> GetStudentParticipations(int activityID)
+        {
+            StudentParticipationService participationService = new StudentParticipationService();
+            List<StudentParticipation> participations = participationService.GetParticipations(activityID);
+            return participations;
+        }
+
+        private void butChooseActivityID_Click(object sender, EventArgs e)
+        {
+            int activityID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[0].Text);
+
+            if (activityID != null)
+            {
+                StudentParticipationService participationService = new StudentParticipationService();
+                participationService.GetParticipations(activityID);
+                DisplayParticipation(activityID);
+            }
+            else
+            {
+                MessageBox.Show("Please select both an activity and a student.");
+            }
+
         }
         //-------------------------------------------Supervisor-------------------------------------------------
 
@@ -923,5 +972,7 @@ namespace SomerenUI
         {
             ShowDrinksPanel();
         }
+
+
     }
 }
