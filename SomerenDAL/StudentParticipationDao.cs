@@ -90,5 +90,40 @@ namespace SomerenDAL
 
             ExecuteEditQuery(query, parameters);
         }
+
+        public List<StudentParticipation> GetParticipatingStudents(int activityID)
+        {
+            string query = "SELECT participant.ParticipantID, participant.studentID, activity.ActivityName, student.FirstName, student.LastName " +
+         "FROM participant " +
+         "JOIN student ON participant.studentID = student.StudentID " +
+         "JOIN activity ON participant.activityID = activity.ActivityID " +
+         "WHERE activity.ActivityID = @ActivityID";
+
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+        new SqlParameter("@ActivityID", activityID)
+            };
+
+            return ReadTablesNonParticipation(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        private List<StudentParticipation> ReadTablesNonParticipation(DataTable dataTable)
+        {
+            List<StudentParticipation> students = new List<StudentParticipation>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                StudentParticipation student = new StudentParticipation()
+                {
+                    participationID = (int)dr["ParticipantID"],
+                    studentID = (int)dr["studentId"],
+                    activityName = dr["ActivityName"].ToString(),
+                    firstName = dr["FirstName"].ToString(),
+                    lastName = dr["LastName"].ToString()
+                };
+                students.Add(student);
+            }
+            return students;
+        }
     }
 }

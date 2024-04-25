@@ -39,5 +39,11 @@ namespace SomerenService
         {
             participationdb.RemoveStudentParticipant(studentID, activityID);
         }
+
+        public List<StudentParticipation> GetParticipations(int activityID)
+        {
+            List<StudentParticipation> participations = participationdb.GetParticipatingStudents(activityID);
+            return participations;
+        }
     }
 }

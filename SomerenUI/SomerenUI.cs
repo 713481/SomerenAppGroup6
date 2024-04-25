@@ -617,6 +617,53 @@ namespace SomerenUI
             }
         }
 
+        public void DisplayParticipation(int activityID)
+        {
+            try
+            {
+                List<StudentParticipation> participation = GetStudentParticipations(activityID);
+                listViewOfParticipationSelect.Items.Clear();
+                foreach (var studentParticipation in participation)
+                {
+                    ListViewItem list = new ListViewItem(studentParticipation.participationID.ToString());
+                    list.Tag = studentParticipation;
+                    list.SubItems.Add(studentParticipation.studentID.ToString());
+                    list.SubItems.Add(studentParticipation.firstName.ToString());
+                    list.SubItems.Add(studentParticipation.lastName.ToString());
+                    list.SubItems.Add(studentParticipation.activityName.ToString());
+                    listViewOfParticipationSelect.Items.Add(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error displaying participation: " + ex.Message);
+            }
+        }
+
+        private void ActivityListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Check if an item is selected
+            if (listViewParticipant.SelectedItems.Count > 0)
+            {
+                // Retrieve the selected activity ID from the ListView
+                int selectedActivityID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[0].Text);
+
+                // Display the participation details for the selected activity
+                DisplayParticipation(selectedActivityID);
+            }
+        }
+        private void listViewParticipant_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewOfParticipationSelect.SelectedItems.Count > 0)
+            {
+                // Retrieve the selected activity ID from the ListView
+                int selectedActivityID = int.Parse(listViewOfParticipationSelect.SelectedItems[0].SubItems[0].Text);
+
+                // Display the participation details for the selected activity
+                DisplayParticipation(selectedActivityID);
+            }
+        }
+
         private List<StudentParticipation> GetParticipation()
         {
             StudentParticipationService participationService = new StudentParticipationService();
@@ -631,11 +678,33 @@ namespace SomerenUI
             return participations;
         }
 
+        private List<StudentParticipation> GetStudentParticipations(int activityID)
+        {
+            StudentParticipationService participationService = new StudentParticipationService();
+            List<StudentParticipation> participations = participationService.GetParticipations(activityID);
+            return participations;
+        }
+
         private void participationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowParticipationPanel();
         }
 
+        private void buParticipants_Click(object sender, EventArgs e)
+        {
+            int activityID = int.Parse(listViewParticipant.SelectedItems[0].SubItems[0].Text);
+
+            if (activityID != null)
+            {
+                StudentParticipationService participationService = new StudentParticipationService();
+                participationService.GetParticipations(activityID);
+                DisplayParticipation(activityID);
+            }
+            else
+            {
+                MessageBox.Show("Please select both an activity and a student.");
+            }
+        }
         private void btbAdd_Click(object sender, EventArgs e)
         {
             if (listViewNotParticipation.SelectedItems == null || listViewNotParticipation.SelectedItems.Count == 0)
@@ -656,6 +725,7 @@ namespace SomerenUI
             {
                 StudentParticipationService participationService = new StudentParticipationService();
                 participationService.AddStudentParticipant(studentID, activityID);
+                ShowParticipationPanel();
             }
             else
             {
@@ -760,13 +830,13 @@ namespace SomerenUI
                 ListViewItem li = new ListViewItem(activity.activityName.ToString());
                 li.SubItems.Add($"{activity.Date:dd/MM/yyyy}");
                 li.Tag = activity;
-                
+
 
                 listViewActivityShow.Items.Add(li);
             }
         }
 
-        
+
         private List<Supervisor> GetSupervisors()
         {
             SupervisorService supervisorsService = new SupervisorService();
@@ -792,7 +862,7 @@ namespace SomerenUI
                 ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
                 li.SubItems.Add(supervisor.lastName.ToString());
                 li.Tag = supervisor;
-                
+
 
                 listViewSupervisorNot.Items.Add(li);
             }
@@ -808,10 +878,10 @@ namespace SomerenUI
             {
                 ListViewItem li = new ListViewItem(supervisor.firstName.ToString());
                 li.SubItems.Add(supervisor.lastName.ToString());
-               
-                    li.SubItems.Add(supervisor.activityName.ToString());
-              
-                li.Tag = supervisor;              
+
+                li.SubItems.Add(supervisor.activityName.ToString());
+
+                li.Tag = supervisor;
                 listViewSupervisorIs.Items.Add(li);
             }
         }
@@ -832,7 +902,7 @@ namespace SomerenUI
                 return;
             }
 
-        
+
 
         }
 

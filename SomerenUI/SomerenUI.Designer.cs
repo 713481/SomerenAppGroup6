@@ -127,6 +127,13 @@
             columnHeader8 = new System.Windows.Forms.ColumnHeader();
             lblRoom = new System.Windows.Forms.Label();
             pnlParticipant = new System.Windows.Forms.Panel();
+            buParticipants = new System.Windows.Forms.Button();
+            listViewOfParticipationSelect = new System.Windows.Forms.ListView();
+            clParID = new System.Windows.Forms.ColumnHeader();
+            clStuID = new System.Windows.Forms.ColumnHeader();
+            clFN = new System.Windows.Forms.ColumnHeader();
+            clLN = new System.Windows.Forms.ColumnHeader();
+            clActName = new System.Windows.Forms.ColumnHeader();
             pictureBox7 = new System.Windows.Forms.PictureBox();
             btbRemove = new System.Windows.Forms.Button();
             btbAdd = new System.Windows.Forms.Button();
@@ -335,17 +342,17 @@
             // 
             // columnHeader12
             // 
-            columnHeader12.Text = "Type";
+            columnHeader12.Text = "Floor";
             columnHeader12.Width = 100;
             // 
             // columnHeader13
             // 
-            columnHeader13.Text = "Floor";
+            columnHeader13.Text = "Building";
             columnHeader13.Width = 120;
             // 
             // columnHeader14
             // 
-            columnHeader14.Text = "Building";
+            columnHeader14.Text = "Type";
             columnHeader14.Width = 120;
             // 
             // label3
@@ -945,6 +952,8 @@
             // 
             // pnlParticipant
             // 
+            pnlParticipant.Controls.Add(buParticipants);
+            pnlParticipant.Controls.Add(listViewOfParticipationSelect);
             pnlParticipant.Controls.Add(pictureBox7);
             pnlParticipant.Controls.Add(btbRemove);
             pnlParticipant.Controls.Add(btbAdd);
@@ -955,6 +964,52 @@
             pnlParticipant.Name = "pnlParticipant";
             pnlParticipant.Size = new System.Drawing.Size(1149, 674);
             pnlParticipant.TabIndex = 22;
+            // 
+            // buParticipants
+            // 
+            buParticipants.Location = new System.Drawing.Point(36, 546);
+            buParticipants.Name = "buParticipants";
+            buParticipants.Size = new System.Drawing.Size(128, 68);
+            buParticipants.TabIndex = 26;
+            buParticipants.Text = "Choose ActivityID To See Participant";
+            buParticipants.UseVisualStyleBackColor = true;
+            buParticipants.Click += buParticipants_Click;
+            // 
+            // listViewOfParticipationSelect
+            // 
+            listViewOfParticipationSelect.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { clParID, clStuID, clFN, clLN, clActName });
+            listViewOfParticipationSelect.Location = new System.Drawing.Point(205, 364);
+            listViewOfParticipationSelect.Name = "listViewOfParticipationSelect";
+            listViewOfParticipationSelect.RightToLeftLayout = true;
+            listViewOfParticipationSelect.Size = new System.Drawing.Size(614, 232);
+            listViewOfParticipationSelect.TabIndex = 25;
+            listViewOfParticipationSelect.UseCompatibleStateImageBehavior = false;
+            listViewOfParticipationSelect.View = System.Windows.Forms.View.Details;
+            // 
+            // clParID
+            // 
+            clParID.Text = "Participation ID";
+            clParID.Width = 120;
+            // 
+            // clStuID
+            // 
+            clStuID.Text = "Student ID";
+            clStuID.Width = 100;
+            // 
+            // clFN
+            // 
+            clFN.Text = "First Name";
+            clFN.Width = 100;
+            // 
+            // clLN
+            // 
+            clLN.Text = "Last Name";
+            clLN.Width = 100;
+            // 
+            // clActName
+            // 
+            clActName.Text = "Acticity Name";
+            clActName.Width = 120;
             // 
             // pictureBox7
             // 
@@ -967,9 +1022,9 @@
             // 
             // btbRemove
             // 
-            btbRemove.Location = new System.Drawing.Point(627, 406);
+            btbRemove.Location = new System.Drawing.Point(36, 468);
             btbRemove.Name = "btbRemove";
-            btbRemove.Size = new System.Drawing.Size(150, 42);
+            btbRemove.Size = new System.Drawing.Size(130, 58);
             btbRemove.TabIndex = 22;
             btbRemove.Text = "Remove Participant";
             btbRemove.UseVisualStyleBackColor = true;
@@ -977,7 +1032,7 @@
             // 
             // btbAdd
             // 
-            btbAdd.Location = new System.Drawing.Point(112, 399);
+            btbAdd.Location = new System.Drawing.Point(36, 393);
             btbAdd.Name = "btbAdd";
             btbAdd.Size = new System.Drawing.Size(130, 49);
             btbAdd.TabIndex = 23;
@@ -988,6 +1043,7 @@
             // listViewNotParticipation
             // 
             listViewNotParticipation.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { NonJoinID, NonJoinFirstName, NonJoinLastName });
+            listViewNotParticipation.FullRowSelect = true;
             listViewNotParticipation.Location = new System.Drawing.Point(599, 74);
             listViewNotParticipation.Name = "listViewNotParticipation";
             listViewNotParticipation.Size = new System.Drawing.Size(320, 269);
@@ -1013,6 +1069,7 @@
             // listViewParticipant
             // 
             listViewParticipant.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ActivityID, ActivityName, StudentID, FirstName1 });
+            listViewParticipant.FullRowSelect = true;
             listViewParticipant.Location = new System.Drawing.Point(43, 74);
             listViewParticipant.MultiSelect = false;
             listViewParticipant.Name = "listViewParticipant";
@@ -1020,6 +1077,7 @@
             listViewParticipant.TabIndex = 1;
             listViewParticipant.UseCompatibleStateImageBehavior = false;
             listViewParticipant.View = System.Windows.Forms.View.Details;
+            listViewParticipant.SelectedIndexChanged += listViewParticipant_SelectedIndexChanged;
             // 
             // ActivityID
             // 
@@ -1223,7 +1281,6 @@
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1161, 741);
-            Controls.Add(pnlSupervisorActivity);
             Controls.Add(menuStrip1);
             Controls.Add(pnlParticipant);
             Controls.Add(pnldrinkorder);
@@ -1233,6 +1290,7 @@
             Controls.Add(pnlReport);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlDashboard);
+            Controls.Add(pnlSupervisorActivity);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "SomerenUI";
@@ -1390,7 +1448,7 @@
         private System.Windows.Forms.ColumnHeader supervisorFirstName;
         private System.Windows.Forms.ColumnHeader SupervisorLastName;
         private System.Windows.Forms.ListView listViewActivityShow;
-        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader clLN;
         private System.Windows.Forms.ColumnHeader ActivityNameShowss;
         private System.Windows.Forms.ColumnHeader columnHeader16;
         private System.Windows.Forms.ColumnHeader columnHeader17;
@@ -1405,6 +1463,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ListView listViewOfParticipationSelect;
+        private System.Windows.Forms.ColumnHeader clParID;
+        private System.Windows.Forms.ColumnHeader clStuID;
+        private System.Windows.Forms.ColumnHeader clFN;
+        private System.Windows.Forms.ColumnHeader clActName;
+        private System.Windows.Forms.Button buParticipants;
         //private System.Windows.Forms.ColumnHeader columnHeader9;
     }
 }
