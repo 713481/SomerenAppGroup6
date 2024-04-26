@@ -580,6 +580,8 @@ namespace SomerenUI
             // Show the success message with the total cost
             MessageBox.Show($"Order placed successfully. Total Price: {priceTotal}");
 
+            ShowDrinkOrderPanel();
+
             // UnselectListviewItem(listviewnamesstudent);
             // UnselectListviewItem(listviewnamesstudent);
         }
