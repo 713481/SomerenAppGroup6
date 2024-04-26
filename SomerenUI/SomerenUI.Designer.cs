@@ -336,17 +336,17 @@
             // 
             // columnHeader12
             // 
-            columnHeader12.Text = "Type";
+            columnHeader12.Text = "Floor";
             columnHeader12.Width = 100;
             // 
             // columnHeader13
             // 
-            columnHeader13.Text = "Floor";
+            columnHeader13.Text = "Building";
             columnHeader13.Width = 120;
             // 
             // columnHeader14
             // 
-            columnHeader14.Text = "Building";
+            columnHeader14.Text = "Type";
             columnHeader14.Width = 120;
             // 
             // label3
@@ -1284,8 +1284,6 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1161, 741);
             Controls.Add(menuStrip1);
-            Controls.Add(pnlParticipant);
-            Controls.Add(pnldrinkorder);
             Controls.Add(pnlRoom);
             Controls.Add(pnlReport);
             Controls.Add(pnlLecturers);
@@ -1293,6 +1291,8 @@
             Controls.Add(pnlStudents);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlSupervisorActivity);
+            Controls.Add(pnlParticipant);
+            Controls.Add(pnldrinkorder);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "SomerenUI";
