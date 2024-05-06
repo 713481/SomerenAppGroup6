@@ -46,7 +46,7 @@ namespace SomerenDAL
                new SqlParameter("@Price", order.price),
                new SqlParameter("@DrinkID", order.drinkID),
                new SqlParameter("@StudentID", order.studentID),
-               new SqlParameter("@countOrder", order.sales)
+               new SqlParameter("@countOrder", countOrder)
             };
 
             ExecuteEditQuery(query, sqlParameters);

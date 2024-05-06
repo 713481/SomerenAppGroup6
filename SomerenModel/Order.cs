@@ -13,5 +13,6 @@ namespace SomerenModel
         public float price { get; set; }
         public DateTime orderDateTime { get; set; }
         public int sales { get; set; }
+
     }
 }
