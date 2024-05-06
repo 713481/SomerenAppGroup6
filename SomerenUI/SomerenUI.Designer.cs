@@ -127,7 +127,6 @@
             columnHeader8 = new System.Windows.Forms.ColumnHeader();
             lblRoom = new System.Windows.Forms.Label();
             pnlParticipant = new System.Windows.Forms.Panel();
-            butChooseActivityID = new System.Windows.Forms.Button();
             listViewOfParticipationSelect = new System.Windows.Forms.ListView();
             clParID = new System.Windows.Forms.ColumnHeader();
             clStuID = new System.Windows.Forms.ColumnHeader();
@@ -955,7 +954,6 @@
             // 
             // pnlParticipant
             // 
-            pnlParticipant.Controls.Add(butChooseActivityID);
             pnlParticipant.Controls.Add(listViewOfParticipationSelect);
             pnlParticipant.Controls.Add(pictureBox7);
             pnlParticipant.Controls.Add(btbRemove);
@@ -968,23 +966,13 @@
             pnlParticipant.Size = new System.Drawing.Size(1149, 675);
             pnlParticipant.TabIndex = 22;
             // 
-            // butChooseActivityID
-            // 
-            butChooseActivityID.Location = new System.Drawing.Point(49, 526);
-            butChooseActivityID.Name = "butChooseActivityID";
-            butChooseActivityID.Size = new System.Drawing.Size(137, 61);
-            butChooseActivityID.TabIndex = 27;
-            butChooseActivityID.Text = "Choose ActivityID To See Participant";
-            butChooseActivityID.UseVisualStyleBackColor = true;
-            butChooseActivityID.Click += butChooseActivityID_Click;
-            // 
             // listViewOfParticipationSelect
             // 
             listViewOfParticipationSelect.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { clParID, clStuID, clFN, clLN, clActName });
-            listViewOfParticipationSelect.Location = new System.Drawing.Point(259, 381);
+            listViewOfParticipationSelect.Location = new System.Drawing.Point(312, 65);
             listViewOfParticipationSelect.Name = "listViewOfParticipationSelect";
             listViewOfParticipationSelect.RightToLeftLayout = true;
-            listViewOfParticipationSelect.Size = new System.Drawing.Size(614, 232);
+            listViewOfParticipationSelect.Size = new System.Drawing.Size(550, 233);
             listViewOfParticipationSelect.TabIndex = 26;
             listViewOfParticipationSelect.UseCompatibleStateImageBehavior = false;
             listViewOfParticipationSelect.View = System.Windows.Forms.View.Details;
@@ -1025,7 +1013,7 @@
             // 
             // btbRemove
             // 
-            btbRemove.Location = new System.Drawing.Point(46, 467);
+            btbRemove.Location = new System.Drawing.Point(347, 601);
             btbRemove.Name = "btbRemove";
             btbRemove.Size = new System.Drawing.Size(150, 43);
             btbRemove.TabIndex = 22;
@@ -1035,9 +1023,9 @@
             // 
             // btbAdd
             // 
-            btbAdd.Location = new System.Drawing.Point(49, 402);
+            btbAdd.Location = new System.Drawing.Point(874, 601);
             btbAdd.Name = "btbAdd";
-            btbAdd.Size = new System.Drawing.Size(130, 49);
+            btbAdd.Size = new System.Drawing.Size(130, 43);
             btbAdd.TabIndex = 23;
             btbAdd.Text = "Add Participant";
             btbAdd.UseVisualStyleBackColor = true;
@@ -1047,9 +1035,9 @@
             // 
             listViewNotParticipation.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { NonJoinID, NonJoinFirstName, NonJoinLastName });
             listViewNotParticipation.FullRowSelect = true;
-            listViewNotParticipation.Location = new System.Drawing.Point(599, 75);
+            listViewNotParticipation.Location = new System.Drawing.Point(763, 369);
             listViewNotParticipation.Name = "listViewNotParticipation";
-            listViewNotParticipation.Size = new System.Drawing.Size(319, 269);
+            listViewNotParticipation.Size = new System.Drawing.Size(331, 218);
             listViewNotParticipation.TabIndex = 22;
             listViewNotParticipation.UseCompatibleStateImageBehavior = false;
             listViewNotParticipation.View = System.Windows.Forms.View.Details;
@@ -1073,13 +1061,14 @@
             // 
             listViewParticipant.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ActivityID, ActivityName, StudentID, FirstName1 });
             listViewParticipant.FullRowSelect = true;
-            listViewParticipant.Location = new System.Drawing.Point(43, 75);
+            listViewParticipant.Location = new System.Drawing.Point(193, 369);
             listViewParticipant.MultiSelect = false;
             listViewParticipant.Name = "listViewParticipant";
-            listViewParticipant.Size = new System.Drawing.Size(508, 269);
+            listViewParticipant.Size = new System.Drawing.Size(481, 218);
             listViewParticipant.TabIndex = 1;
             listViewParticipant.UseCompatibleStateImageBehavior = false;
             listViewParticipant.View = System.Windows.Forms.View.Details;
+            listViewParticipant.SelectedIndexChanged += listViewParticipant_SelectedIndexChanged;
             // 
             // ActivityID
             // 
@@ -1284,6 +1273,8 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1161, 741);
             Controls.Add(menuStrip1);
+            Controls.Add(pnlParticipant);
+            Controls.Add(pnldrinkorder);
             Controls.Add(pnlRoom);
             Controls.Add(pnlReport);
             Controls.Add(pnlLecturers);
@@ -1291,8 +1282,6 @@
             Controls.Add(pnlStudents);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlSupervisorActivity);
-            Controls.Add(pnlParticipant);
-            Controls.Add(pnldrinkorder);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "SomerenUI";
@@ -1465,7 +1454,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColumnHeader roomId;
-        private System.Windows.Forms.Button butChooseActivityID;
         private System.Windows.Forms.ListView listViewOfParticipationSelect;
         private System.Windows.Forms.ColumnHeader clParID;
         private System.Windows.Forms.ColumnHeader clStuID;
