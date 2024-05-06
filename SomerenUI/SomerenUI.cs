@@ -552,18 +552,24 @@ namespace SomerenUI
 
             string input = txtTotalAmount.Text;
             int numberOfDrink;
-            if (!int.TryParse(input, out numberOfDrink))
+            if (!int.TryParse(input, out numberOfDrink) || numberOfDrink <= 0)
             {
                 MessageBox.Show("You entered an invalid quantity.");
                 return;
             }
 
-       
+
             Drink selectedDrink = orderService.GetDrinkById(drinkID); // You need to implement this method
 
             if (selectedDrink == null)
             {
                 MessageBox.Show("Unable to retrieve selected drink.");
+                return;
+            }
+
+            if (selectedDrink.Stock <= 0)
+            {
+                MessageBox.Show("Selected drink is out of stock. Please select another drink.");
                 return;
             }
 
@@ -795,6 +801,33 @@ namespace SomerenUI
             }
 
         }
+
+        private void listViewParticipant_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewParticipant.SelectedItems.Count > 0)
+            {
+                try
+                {
+                    int activityID = int.Parse(listViewParticipant.SelectedItems[0].Text);
+                    listViewOfParticipationSelect.Items.Clear();
+
+                    if (activityID != null)
+                    {
+                        StudentParticipationService participationService = new StudentParticipationService();
+                        participationService.GetParticipations(activityID);
+                        DisplayParticipation(activityID);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select both an activity and a student.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
         //-------------------------------------------Supervisor-------------------------------------------------
 
         public void ShowSupervisorPanel()
@@ -975,7 +1008,5 @@ namespace SomerenUI
         {
             ShowDrinksPanel();
         }
-
-
     }
 }
