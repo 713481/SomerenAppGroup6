@@ -54,10 +54,10 @@ namespace SomerenDAL
 
         public Drink GetDrinkById(int drinkId)
         {
-            string query = "SELECT * FROM drink WHERE DrinkID = @DrinkID";
+            string query = "SELECT DrinkID, Name, Price, Stock FROM drink WHERE DrinkID = @DrinkID";
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-            new SqlParameter("@DrinkID", drinkId)
+        new SqlParameter("@DrinkID", drinkId)
             };
 
             DataTable dataTable = ExecuteSelectQuery(query, sqlParameters);
@@ -69,6 +69,7 @@ namespace SomerenDAL
                     Id = Convert.ToInt32(row["DrinkID"]),
                     DrinkName = row["Name"].ToString(),
                     Price = Convert.ToSingle(row["Price"]),
+                    Stock = Convert.ToInt32(row["Stock"]) // Add the Stock property
                 };
                 return drink;
             }

@@ -567,27 +567,30 @@ namespace SomerenUI
                 return;
             }
 
-            if (selectedDrink.Stock <= 0)
+            if (selectedDrink.Stock <= 0 || numberOfDrink > selectedDrink.Stock)
             {
                 MessageBox.Show("Selected drink is out of stock. Please select another drink.");
                 return;
             }
+            else // Drink is in stock
+            {
+                // Update the stock of the selected drink
+                orderService.UpdateDrinkStock(drinkID, numberOfDrink); // You need to implement this method
 
-            // Calculate the total cost using the retrieved drink's price
-            float priceTotal = selectedDrink.Price * numberOfDrink;
+                // Calculate the total cost using the retrieved drink's price
+                float priceTotal = selectedDrink.Price * numberOfDrink;
 
-            // Update the order with the calculated total cost
-            order.price = priceTotal;
+                // Update the order with the calculated total cost
+                order.price = priceTotal;
 
-            // Call the orderService to place the order
-            orderService.OrderDrink(order, numberOfDrink, studentID);
+                // Call the orderService to place the order
+                orderService.OrderDrink(order, numberOfDrink, studentID);
 
-            orderService.UpdateDrinkStock(drinkID, numberOfDrink); // You need to implement this method
+                // Show the success message with the total cost
+                MessageBox.Show($"Order placed successfully. Total Price: {priceTotal}");
 
-            // Show the success message with the total cost
-            MessageBox.Show($"Order placed successfully. Total Price: {priceTotal}");
-
-            ShowDrinkOrderPanel();
+                ShowDrinkOrderPanel();
+            }
 
             // UnselectListviewItem(listviewnamesstudent);
             // UnselectListviewItem(listviewnamesstudent);
