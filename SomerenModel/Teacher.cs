@@ -10,5 +10,7 @@
         public int PhoneNumber { get; set; } // phone number
         public int RoomID { get; set; } // room id 
 
+        public string  girlFriend {  get; set; }
+
     }  
 }
