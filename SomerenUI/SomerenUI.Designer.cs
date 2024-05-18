@@ -491,7 +491,7 @@
             btncheckout.Name = "btncheckout";
             btncheckout.Size = new System.Drawing.Size(373, 51);
             btncheckout.TabIndex = 26;
-            btncheckout.Text = "Checkout";
+            btncheckout.Text = "Place Order";
             btncheckout.UseVisualStyleBackColor = true;
             btncheckout.Click += btncheckout_Click;
             // 
@@ -1273,7 +1273,6 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1161, 741);
             Controls.Add(menuStrip1);
-            Controls.Add(pnlParticipant);
             Controls.Add(pnldrinkorder);
             Controls.Add(pnlRoom);
             Controls.Add(pnlReport);
@@ -1282,6 +1281,7 @@
             Controls.Add(pnlStudents);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlSupervisorActivity);
+            Controls.Add(pnlParticipant);
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "SomerenUI";
